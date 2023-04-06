@@ -1,0 +1,16 @@
+{% extends "base/reception/rec_base.html" %}
+{%block content%}
+<div>
+  <h1>Reception | Dashboard</h1>
+</div>
+
+<div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+  <div class="card text-center" style="width: 20rem;">
+    <i class="fa fa-user text-primary" aria-hidden="true" style="font-size:10rem;" ></i>
+    <div class="card-body">
+      <h5 class="card-title">My Profile</h5>
+      <a href="{% url 'updatereceptionprofile'%}" class="btn btn-primary">Update Profile</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base/pharmacist/pharma_base.html" %}
+{% block scripts%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/profile.css'%}">
+{% endblock %}
+{%block content%}
+<div class="feed">
+    <div style="margin-bottom: 2rem;">
+        <h2>DOCTOR | MANAGE PATIENTS</h2>
+    </div>
+    <p style="font-size: 1.5rem;">Patient Details</p>
+        <table class="table table-striped">
+            <tbody>
+              <tr>
+                <td style="font-weight: bold;">Patient Name</td>
+                <td>{{patient.first_name}}  {{patient.middle_name}}  {{patient.last_name}}</td>
+                <td style="font-weight: bold;">Patient Email</td>
+                <td>{{patient.email}} </td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">Patient Mobile Number</td>
+                <td>{{patient.phone}} </td>
+                <td style="font-weight: bold;">Patient Address</td>
+                <td>{{patient.address}} </td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">Patient Gender</td>
+                <td>{{patient.gender}} </td>
+                <td style="font-weight: bold;">Patient Age</td>
+                <td>{{patient.get_age}} </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+<p style="font-size: 1.5rem;">Prescribed Medicines</p>
+
+{% for prescription in prescription_history%}
+<div class="card" style="margin-top: 1rem;">
+  <div class="card-header">
+    <div>
+        <div style="display: flex; align-items: center;"><h6 style="font-weight: 400;">prescribed by:  </h6><h6> &emsp; {{prescription.Doctor.first_name}} {{prescription.Doctor.last_name}}</h5></div>
+        <div style="display: flex;"><h6 style="font-weight: 400;">Specalization: </h6><h6> &emsp; {{prescription.Doctor.Specalization}} </h6> </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <h4 class="card-title">{{prescription.medicine}}</h4>
+    <h6 class="card-title">{{prescription.dosage}}</h6>
+    <p class="card-text">{{prescription.instruction}}</p>
+  </div>
+  <div class="card-footer">
+    {% if prescription.status == False %}
+        <button type="button" class="btn btn-success">Picked Up</button>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,128 @@
+body{
+    width: 100%;
+}
+.home-slider{
+    width: 100%;
+    background-color: red;
+}
+@media (min-width: 992px){
+.nav-item {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+}
+.nav-btn-p:hover{
+    text-decoration: underline;
+    text-underline-offset: 8px;
+    text-decoration-color:#007bff;
+}
+.key-features .kvxol {
+    padding: 0px;
+ }
+.key-features .single-key {
+background-color: #FFF;
+margin-bottom: 30px;
+text-align: center;
+padding: 30px; }
+.key-features .single-key i {
+    background-color: #FFF;
+    padding: 20px;
+    font-size: 42px;
+    color: #00ab9f;
+    margin-bottom: 30px;
+    border-radius: 50px; }
+.key-features .single-key p {
+    font-family: "mouse-300", Arial, Helvetica, sans-serif;
+    font-size: 15px; }
+.key-features .ky-1 {
+background-color: #03509e;
+color: #FFF;
+margin-bottom: 0px; }
+.key-features .ky-2 {
+background-color: #0085bc;
+color: #FFF;
+margin-bottom: 0px; }
+
+.department {
+padding: 80px 50px;
+background-color: #FFF; }
+@media screen and (max-width: 940px) {
+    .department {
+    padding: 50px 10px; } }
+
+
+
+  /*====================================== About Us Style ====================================*/
+.full-img {
+  width: 100% ; 
+}
+.about-us .abut-yoiu {
+  padding: 50px;
+  background-color: #FFF; }
+
+
+  /* ===================================== Gallery Style  ================================== */
+
+
+.gallery {
+padding: 80px 50px;
+background-color: #FAFAFA;
+}
+.inner-title{
+    text-align: center;
+}
+
+@media screen and (max-width: 940px) {
+    .gallery {
+    padding: 50px 10px; } }
+
+.gallery-title {
+font-size: 36px;
+color: #00ab9f;
+text-align: center;
+font-weight: 500;
+margin-bottom: 70px; }
+
+.gallery-title:after {
+content: "";
+position: absolute;
+width: 7.5%;
+left: 46.5%;
+height: 45px;
+border-bottom: 1px solid #00ab9f; }
+
+
+.port-image {
+width: 100%; }
+
+.gallery_product {
+margin-bottom: 30px; }
+ 
+/* ===================================== Contact US CSS ================================== */
+.contact-rooo {
+    padding: 80px 50px;
+    background-color: #FFF;
+}
+
+@media screen and (max-width: 940px) {
+    .contact-rooo {
+ padding: 50px 10px; 
+} 
+}
+
+    .contact-us-single {
+    background-color: #FFF; }
+    .contact-us-single .cop-ck {
+    padding: 10px 30px; }
+    .contact-us-single .cop-ck h2 {
+    font-size: 22px;
+    margin-bottom: 20px; }
+    .contact-us-single .cf-ro {
+    margin-top: 10px; }
+
+/* ===================================== Fooer CSS ================================== */
+.copy{
+    width: 100%;
+    background-color: blue;
+}
+  
