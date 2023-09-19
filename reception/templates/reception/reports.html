@@ -1,0 +1,21 @@
+{% extends "reception/rec_base.html" %}
+{%block content%}
+<div style="margin: -20px; width: 90%;">
+    <h1>Reports</h1>
+    <br>
+    <div>
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Download Patients Data</h5>
+              <a href="{% url 'export-pdf' %}" class="btn btn-danger" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Export PDF</a>
+              <a href="{% url 'export-excel' %}" class="btn btn-success"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Excel</a> 
+            </div>
+        </div>
+
+        <hr>
+
+        <div>
+        </div>
+    </div>
+</div>
+{% endblock%}

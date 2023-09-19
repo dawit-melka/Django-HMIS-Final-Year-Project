@@ -1,0 +1,16 @@
+{% extends "nurse/nurse_base.html" %}
+{%block content%}
+  <div style="margin-top: -40px;">
+    <a href= "{% url 'deadpatients'%}"> <button class="btn btn-success">Go To Death History </button> </a>
+    <hr>
+    <h2> Death Registeration Form </h2>
+    <div>
+      {% load crispy_forms_tags %}
+      <form method="POST" action="{% url 'registerdeath'%}">
+        {% csrf_token %}
+        {{registerdeathform|crispy}}
+        <button type="submit" class="btn btn-danger">Register</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}  

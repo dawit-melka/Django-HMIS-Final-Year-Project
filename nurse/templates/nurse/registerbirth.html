@@ -1,0 +1,131 @@
+{% extends "nurse/nurse_base.html" %}
+
+{%block content%}
+<h1>Register Birth</h1>
+
+<hr>
+
+{% load crispy_forms_tags %}
+<form method="POST">
+    {% csrf_token %}
+    <h4>Baby Information</h4>
+
+    <div class="form-row" style="display: flex; justify-content: space-between;">
+      <div class="form-group col-md-3" style="margin-right: 1rem;">
+        {{ form.first_name|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-3" style="margin-right: 1rem;">
+        {{ form.middle_name|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-3">
+        {{ form.last_name|as_crispy_field }}
+      </div>
+    </div>
+
+    <div class="form-row" style="display: flex; justify-content: space-between;">
+      <div class="form-group col-md-3" style="margin-right: 1rem;">
+        {{ form.gender|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-3" style="margin-right: 1rem;">
+        {{ form.date_of_birth|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-3">
+        {{ form.time_of_birth|as_crispy_field }}
+      </div>
+    </div>
+
+    <div class="form-row" style="display: flex; justify-content: space-between;">
+      <div class="form-group col-md-3" style="margin-right: 1rem;">
+        {{ form.birth_weight|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-3" style="margin-right: 1rem;">
+        {{ form.birth_length|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-3">
+        
+      </div>
+    </div>
+
+    <hr>
+
+    <h4>Mother's Information</h4>
+
+    <div class="form-row" style="display: flex; justify-content: space-between;">
+      <div class="form-group col-md-3" style="margin-right: 1rem;">
+        {{ form.mother_first_name|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-3" style="margin-right: 1rem;">
+        {{ form.mother_middle_name|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-3">
+        {{ form.mother_last_name|as_crispy_field }}
+      </div>
+    </div>
+
+    <div class="form-row" style="display: flex; justify-content: space-between;">
+      <div class="form-group col-md-3" style="margin-right: 1rem;">
+        {{ form.mother_date_of_birth|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-3" style="margin-right: 1rem;">
+        {{ form.mother_nationality|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-3">
+        {{ form.mother_occupation|as_crispy_field }}
+      </div>
+    </div>
+
+    <hr>
+    <h4>Father's Information</h4>
+
+    <div class="form-row" style="display: flex; justify-content: space-between;">
+      <div class="form-group col-md-3" style="margin-right: 1rem;">
+        {{ form.father_first_name|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-3" style="margin-right: 1rem;">
+        {{ form.father_middle_name|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-3">
+        {{ form.father_last_name|as_crispy_field }}
+      </div>
+    </div>
+
+    <div class="form-row" style="display: flex; justify-content: space-between;">
+      <div class="form-group col-md-3" style="margin-right: 1rem;">
+        {{ form.father_date_of_birth|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-3" style="margin-right: 1rem;">
+        {{ form.father_nationality|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-3">
+        {{ form.father_occupation|as_crispy_field }}
+      </div>
+    </div>
+
+    <hr>
+    <h4>Address</h4>
+    <div class="form-row" style="display: flex; justify-content: space-between;">
+      <div class="form-group col-md-3" style="margin-right: 1rem;">
+        {{ form.address|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-3" style="margin-right: 1rem;">
+        {{ form.region|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-3">
+        {{ form.city|as_crispy_field }}
+      </div>
+    </div>
+    <div class="form-row" style="display: flex; justify-content: space-between;">
+      <div class="form-group col-md-6" style="margin-right: 1rem;">
+        {{ form.email|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-6" style="margin-right: 1rem;">
+        {{ form.phone|as_crispy_field }}
+      </div>
+    
+    </div>
+
+
+
+    <button type="submit" class="btn btn-success">Register</button>
+  </form>
+{% endblock%}

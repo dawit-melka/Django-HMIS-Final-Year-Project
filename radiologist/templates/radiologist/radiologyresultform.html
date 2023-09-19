@@ -1,0 +1,29 @@
+{% extends "radiologist/radiologist_base.html" %}
+{%block content%}
+<div>
+<h3> Radiology Order </h3>
+<div class="card" style="margin-top: 1rem;">
+    <div class="card-header">
+      <div>
+          <div style="display: flex; align-items: center;"><h6 style="font-weight: 400;">ordered by:  </h6><h6> &emsp; {{radiologyorder.Doctor.first_name}} {{radiologyorder.Doctor.last_name}}</h5></div>
+          <div style="display: flex;"><h6 style="font-weight: 400;">Specalization: </h6><h6> &emsp; {{radiologyorder.Doctor.Specalization}} </h6> </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Imaging modality : {{radiologyorder.imagingtype}}</h5>
+      <p class="card-text"><strong>Description : </strong>{{radiologyorder.description}}</p>
+    </div>
+  </div>
+    {% load crispy_forms_tags %}
+    <hr/>
+    <h3> Result Form </h3>
+    <div class="container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" value="Submit" class="btn btn-success">
+    </form>
+    </div>
+</div>
+    
+{% endblock %}

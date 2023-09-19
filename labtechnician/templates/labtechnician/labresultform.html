@@ -1,0 +1,48 @@
+{% extends "labtechnician/lab_base.html" %}
+{%block content%}
+<div style="margin-top: -20px;">
+  <h3>Lab Result Form</h3>
+  <hr>
+
+  <form method="POST" style="display: flex;">
+    {% load crispy_forms_tags %}
+    {% csrf_token %}
+
+    {% if laborder.profile_test.all %}
+      <div style="margin-right: 2rem;">
+        <h5>Profile Test</h5>
+        {{profiletestresultform|crispy}}
+      </div>
+    {% endif %}
+
+    {% if laborder.biochemistry_test.all %}
+      <div style="margin-right: 4rem;">
+        <h5>Biochemistry Test</h5>
+        {{biochemistrytestresultform|crispy}}
+      </div>
+    {% endif %}
+    {% if laborder.hematology_test.all %}
+      <div style="margin-right: 4rem;">
+        <h5>Hematology Test</h5>
+        {{hematologyresultform|crispy}}
+      </div>
+    {% endif %}
+    {% if laborder.microbiology_test.all %}
+      <div style="margin-right: 4rem;">
+        <h5>Microbiology Test</h5>
+        {{microbiologyresultform|crispy}}
+      </div>
+    {% endif %}
+    {% if laborder.anatomical_pathology_test.all %}
+      <div style="margin-right: 2rem;">
+        <h5>Anatomical Pathology</h5>
+        {{anatomicalpathologyresultform|crispy}}
+      </div>
+    {% endif %}
+    <div style="margin-top: 10rem;">
+    <button type="submit" class="btn btn-success">Register Result</button>
+    </div>
+    </form> 
+</div>
+    
+{% endblock %}

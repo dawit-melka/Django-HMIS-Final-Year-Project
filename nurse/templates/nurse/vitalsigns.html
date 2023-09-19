@@ -1,0 +1,125 @@
+{% extends "nurse/nurse_base.html" %}
+{% block scripts%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/profile.css'%}">
+{% endblock %}
+{%block content%} 
+<div class="feed">
+    <div style="margin-bottom: 2rem;">
+        <h2>NURSE | MANAGE PATIENTS VITAL SIGNS</h2>
+    </div>
+    {% if dead == True %}
+    <div class="alert alert-danger" role="alert">
+      This Patient is Dead.
+    </div>
+    {% endif %}
+    <p style="font-size: 1.5rem;">Patient Details</p>
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <td style="font-weight: bold;">Patient Name</td>
+          <td>{{patient.first_name}}  {{patient.middle_name}}  {{patient.last_name}}</td>
+          <td style="font-weight: bold;">Patient Email</td>
+          <td>{{patient.email}} </td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">Patient Mobile Number</td>
+          <td>{{patient.phone}} </td>
+          <td style="font-weight: bold;">Patient Address</td>
+          <td>{{patient.address}} /{{patient.region}} /{{patient.city}}</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">Patient Gender</td>
+          <td>{{patient.gender}} </td>
+          <td style="font-weight: bold;">Patient Age</td>
+          <td>{{patient.get_age}} </td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">Patient Marital Status</td>
+          <td>{{patient.marital_status}} </td>
+          <td style="font-weight: bold;">Patient Blood Type</td>
+          <td>{{patient.bloodtype}} {{patient.RH}}</td>
+        </tr>
+      </tbody>
+    </table>
+        
+        {% if dead == False %}
+        <div>
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#recordvitalsignsModal">
+            Record Vital Signs
+          </button>
+
+          {%include 'nurse/recordvitalsigns.html'%}
+        
+          
+        </div>
+        
+        {%for appointment in appointments %}
+        <div style="margin-top: 1rem;">
+          <div>
+            <div class="card w-75">
+              <div class="card-body">
+                <h5 class="card-title">Appointments</h5>
+
+                <p class="card-text">The patient have appointment today with Dr. {{appointment.Doctor.first_name}} {{appointment.Doctor.last_name}} ({{appointment.Doctor.Specalization}}).</p>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+
+        {%endif%}
+
+        {% if dead == True %}
+          <div class="alert alert-danger" role="alert">
+          <h5>Death report</h5>
+          <p>Death Date: {{death.death_date}}</p>
+          <p>Death time: {{death.death_time}}</p>
+          <p>Death Reason: {{death.death_reason}}</p>
+          </div>
+        {% endif %}
+
+
+        <div style="margin-top: 1rem;">
+          <h2> Vital Sign History</h2>
+          {% for vitalsign in vitalsigns%}
+          <div class="card">
+            <div class="card-header" style="display: flex; justify-content: space-between;">
+              <div>Taken By : Nurse {{vitalsign.Nurse.first_name}} {{vitalsign.Nurse.last_name}}</div>
+              <div>{{vitalsign.created}}</div>
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>Weight</td>
+                      <td>{{vitalsign.weight}}</td>
+                      <td>Temprature</td>
+                      <td>{{vitalsign.temprature}}</td>
+                    </tr>
+                    <tr>
+                      <td>Pulse</td>
+                      <td>{{vitalsign.pulse}}</td>
+                      <td>Blood Pressure</td>
+                      <td>{{vitalsign.blood_pressure}}</td>
+                    </tr>
+                    <tr>
+                      <td>Respiration</td>
+                      <td>{{vitalsign.respirations}}</td>
+                      <td>Blood Sugar</td>
+                      <td>{{vitalsign.bloodsugar}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </blockquote>
+            </div>
+          </div>
+          <br>
+          {%endfor%}
+
+        </div>
+    </div>
+
+{% endblock %}

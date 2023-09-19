@@ -1,0 +1,93 @@
+{% extends "materialmanager/materialmanager_base.html" %}
+{% block scripts%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/profile.css'%}">
+{% endblock %}
+{%block content%}
+<div class="feed" style="margin: -30px;">
+    <div style="margin-bottom: 2rem;">
+        <h3>Service History</h3>
+    </div>
+    <p style="font-size: 1.5rem;">Material Details</p>
+    {% if material.dispose == True %}
+    <div class="alert alert-danger" role="alert">
+      This material is disposed!
+    </div>
+    {% endif %}
+        <table class="table table-striped">
+            <tbody>
+              <tr>
+                <td style="font-weight: bold;">Inventory Number</td>
+                <td>{{material.inventory_number}}</td>
+                <td style="font-weight: bold;">Equipment Name</td>
+                <td>{{material.equipment_name}} </td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">Equipment Type</td>
+                <td>{{material.equipment_type}} </td>
+                <td style="font-weight: bold;">Manufacturer</td>
+                <td>{{material.manufacturer}} </td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">Model</td>
+                <td>{{material.model}} </td>
+                <td style="font-weight: bold;">Serial Number</td>
+                <td>{{material.serial_number}} </td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">Country of Origin</td>
+                <td>{{material.country_of_origin}} </td>
+                <td style="font-weight: bold;">Year of Manufacture</td>
+                <td>{{material.year_of_manufacture}} </td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">Warranty Expired Date</td>
+                <td>{{material.warranty_expired_date}} </td>
+                <td style="font-weight: bold;">Power Requirment</td>
+                <td>{{material.power_requirment}} V</td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">Spare Part Avilable</td>
+                <td>{{material.spare_parts_available}} </td>
+                <td style="font-weight: bold;">Manuals Available</td>
+                <td>{{material.manuals_available}} </td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">Registered on</td>
+                <td>{{material.created}} </td>
+                <td style="font-weight: bold;">Registered By </td>
+                <td>{{material.registered_by}} </td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <br>
+          <a href="{% url 'material' material.inventory_number %}"><button class="btn btn-outline-success">Relocation History</button></a>
+          <a href="{% url 'servicehistory' material.inventory_number %}"><button class="btn btn-success">Service History</button></a>
+          <hr>
+
+          <div>
+            {% for servicehistory in servicehistorys %}
+            <div class="card">
+              <div class="card-header" style="display: flex; justify-content: space-between;">
+                <div></div>
+                <div> Service on :{{servicehistory.created}}</div>
+              </div>
+              <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                <div style="font-size: 1.2rem;"><div style="font-weight: bold; display: inline;">Service Type</div> : {{servicehistory.service_type}}</div>
+                <div><div style="font-size: 1rem; font-weight: bold; display: inline;">Description </div>: {{servicehistory.service_description}}</div>
+                <div><div style="font-size: 1rem; font-weight: bold; display: inline;">Started and ended</div> : {{servicehistory.start_at}} - {{servicehistory.start_at}}</div>
+                <div><div style="font-size: 1rem; font-weight: bold; display: inline;">Service Cost number</div> : {{servicehistory.service_cost}}</div>
+
+                </blockquote>
+              </div>
+              </div>
+              <br>
+              {% endfor %}
+              <br>
+          </div>
+
+    </div>
+
+{% endblock %}

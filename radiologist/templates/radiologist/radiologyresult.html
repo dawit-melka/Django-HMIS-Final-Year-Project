@@ -1,0 +1,37 @@
+{% extends "radiologist/radiologist_base.html" %}
+{%block content%}
+<div>
+<h3> Radiology Order </h3>
+<div class="card" style="margin-top: 1rem;">
+    <div class="card-header">
+      <div>
+          <div style="display: flex; align-items: center;"><h6 style="font-weight: 400;">ordered by:  </h6><h6> &emsp; {{radiologyorder.Doctor.first_name}} {{radiologyorder.Doctor.last_name}}</h5></div>
+          <div style="display: flex;"><h6 style="font-weight: 400;">Specalization: </h6><h6> &emsp; {{radiologyorder.Doctor.Specalization}} </h6> </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Imaging modality : {{radiologyorder.imagingtype}}</h5>
+      <p class="card-text"><strong>Description : </strong>{{radiologyorder.description}}</p>
+    </div>
+  </div>
+</div>
+<br>
+<h3> Result </h3>
+
+{% for radiologyresult in radiologyresults %}
+<div class="card" style="margin-top: 1rem;">
+  <div class="card-header">
+    <div>
+        <div style="display: flex; align-items: center;"><h6 style="font-weight: 400;">Radiologist :  </h6><h6> &emsp; {{radiologyresult.technician.first_name}} {{radiologyresult.technician.last_name}}</h5></div>
+        <div style="display: flex;"><h6 style="font-weight: 400;">date and time : </h6><h6> &emsp; {{radiologyresult.created_at}} </h6> </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <a href="{{ radiologyresult.File.url }}" class="btn btn-outline-secondary" style="margin: 2px;">View Result</a>
+    <p class="card-text"><strong>Description : </strong>{{radiologyresult.description}}</p>
+  </div>
+</div>
+{% endfor %}
+
+    
+{% endblock %}

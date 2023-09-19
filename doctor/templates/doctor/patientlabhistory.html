@@ -1,0 +1,55 @@
+{% extends "doctor/doc_base.html" %}
+{%block content%}
+
+<h2>DOCTOR | MANAGE PATIENTS</h2>
+
+<hr>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+	<li class="nav-item">
+		<a class="nav-link" href='{% url 'patienthistory' patient.id %}'><button type="button" class="btn btn-success">Medical History</button></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link " href='{% url 'doctorvitalsigns' patient.id %}'><button type="button" class="btn btn-success">Vital Signs History</button></a>	
+	</li>
+	<li class="nav-item">
+		<a class="nav-link active" href='{% url 'patientlabhistory' patient.id %}'><button type="button" class="btn btn-primary">Lab History</button></a>	
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href='{% url 'patientradiologyhistory' patient.id %}'><button type="button" class="btn btn-success">Radiology History</button></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href='{% url 'patientlprescriptionhistory' patient.id %}'><button type="button" class="btn btn-success">Prescription History</button></a>
+	</li>
+
+</ul>
+<hr>
+
+<h3 style="font-size: 1.5rem; margin-top:1rem">Patient Lab Order and Results</h3>	
+
+
+<div>
+
+{% for laborder in laborders %}
+	<div class="card">
+	  <div class="card-header" style="display: flex; justify-content: space-between;">
+		  <div>Ordered By : Dr. {{laborder.Doctor.first_name}} {{laborder.Doctor.last_name}} ({{laborder.Doctor.Specalization}})</div>
+		  <div>
+		{{laborder.created}}
+		{% if laborder.profiletestresult or laborder.biochemistrytestresult or laborder.hematologyresult or laborder.microbiologyresult or laborder.AnatomicalPathologyResult%}
+		  <button class="btn btn-primary btn-sm">Done</button>
+		{%else%}
+		  <button class="btn btn-danger btn-sm">Pending</button>
+		{% endif %}
+	  </div>
+	  </div>
+	  <div class="card-body">
+		<blockquote class="blockquote mb-0">
+		  <a href={%url 'doclaborderandResults' laborder.id %}><button class="btn btn-success">Show Lab Order and Result </button></a>
+		</blockquote>
+	  </div>
+	</div>
+	<br>
+  {% endfor %}
+</div>
+
+{% endblock %}

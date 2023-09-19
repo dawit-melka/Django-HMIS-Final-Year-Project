@@ -1,0 +1,96 @@
+{% extends "materialmanager/materialmanager_base.html" %}
+{% block scripts%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/profile.css'%}">
+{% endblock %}
+{%block content%}
+<div class="feed" style="margin: -30px;">
+    <div style="margin-bottom: 2rem;">
+        <h3>INVENTORY MANAGER | MANAGE MATERIAL</h3>
+    </div>
+    <p style="font-size: 1.5rem;">Material Details</p>
+    {% if material.dispose == True %}
+    <div class="alert alert-danger" role="alert">
+      This material is disposed!
+    </div>
+    {% endif %}
+        <table class="table table-striped">
+            <tbody>
+              <tr>
+                <td style="font-weight: bold;">Inventory Number</td>
+                <td>{{material.inventory_number}}</td>
+                <td style="font-weight: bold;">Equipment Name</td>
+                <td>{{material.equipment_name}} </td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">Equipment Type</td>
+                <td>{{material.equipment_type}} </td>
+                <td style="font-weight: bold;">Manufacturer</td>
+                <td>{{material.manufacturer}} </td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">Model</td>
+                <td>{{material.model}} </td>
+                <td style="font-weight: bold;">Serial Number</td>
+                <td>{{material.serial_number}} </td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">Country of Origin</td>
+                <td>{{material.country_of_origin}} </td>
+                <td style="font-weight: bold;">Year of Manufacture</td>
+                <td>{{material.year_of_manufacture}} </td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">Warranty Expired Date</td>
+                <td>{{material.warranty_expired_date}} </td>
+                <td style="font-weight: bold;">Power Requirment</td>
+                <td>{{material.power_requirment}} V</td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">Spare Part Avilable</td>
+                <td>{{material.spare_parts_available}} </td>
+                <td style="font-weight: bold;">Manuals Available</td>
+                <td>{{material.manuals_available}} </td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">Registered on</td>
+                <td>{{material.created}} </td>
+                <td style="font-weight: bold;">Registered By </td>
+                <td>{{material.registered_by}} </td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+          {% if material.manual_file %}
+          <a href="{{ material.manual_file.url }}" class="btn btn-outline-dark" style="margin: 2px;">View Manual</a>
+          <br>
+          {% endif %}
+          <br>
+          <a href="{% url 'material' material.inventory_number %}"><button class="btn btn-success">Relocation History</button></a>
+          <a href="{% url 'servicehistory' material.inventory_number %}"><button class="btn btn-outline-success">Service History</button></a>
+          <hr>
+
+          <div>
+            {% for rematerial in relocatematerials %}
+            <div class="card">
+              <div class="card-header" style="display: flex; justify-content: space-between;">
+                <div></div>
+                <div> Relocated on :{{rematerial.created}}</div>
+              </div>
+              <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                <div style="font-size: 1.2rem;"><div style="font-weight: bold; display: inline;">Device Department</div> : {{rematerial.relocation_department}}</div>
+                <div><div style="font-size: 1rem; font-weight: bold; display: inline;">Location </div>: {{rematerial.location}}</div>
+                <div><div style="font-size: 1rem; font-weight: bold; display: inline;">Contact Person</div> : {{rematerial.department_contact_person}}</div>
+                <div><div style="font-size: 1rem; font-weight: bold; display: inline;">Phone number</div> : {{rematerial.phonenumber}}</div>
+
+                </blockquote>
+              </div>
+              </div>
+              <br>
+              {% endfor %}
+          </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "labtechnician/lab_base.html" %}
+{%block content%}
+<div style="margin-top: -50px;">
+    <h3> Lab Order </h3>
+    <hr>
+    {% load crispy_forms_tags %}
+          <form>
+            {% csrf_token %}    
+            <div class="form-row" style="display: flex; justify-content: space-between;">
+              <div class="form-group col-md-1 mb-0" style="margin-right: 1rem;">
+                {{ orderlabform.sample_type|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-1 mb-0" >
+                {{ orderlabform.fasting|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-1 mb-0" style="margin-right: 1rem;">
+                {{ orderlabform.profile_test|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-1 mb-0" >
+                {{ orderlabform.biochemistry_test|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-1 mb-0" >
+                {{ orderlabform.hematology_test|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-1 mb-0" >
+                {{ orderlabform.microbiology_test|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-2 mb-0" >
+                {{ orderlabform.anatomical_pathology_test|as_crispy_field }}
+              </div>
+          </div>
+        </div>
+      </form>
+      <h6>Additional Tests:</h6> <p>{{laborder.additional_tests}}</p>
+      <h6>Notes: </h6> <p>{{laborder.note}}</p>
+</div>  
+<div class="card-footer">
+  {% if laborder.profiletestresult or laborder.biochemistrytestresult or laborder.hematologyresult or laborder.microbiologyresult or laborder.AnatomicalPathologyResult%}
+    <a href="{% url 'laborderresult' laborder.id %}"> <button type="button" class="btn btn-primary">Result</button></a>
+  {% else %}
+    <a href="{% url 'labresultform' laborder.id %}"> <button type="button" class="btn btn-success">Fill Result</button></a>
+  {% endif %}
+</div>
+{% endblock %}

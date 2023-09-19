@@ -1,0 +1,51 @@
+{% extends "doctor/doc_base.html" %}
+{%block content%}
+
+<h2>DOCTOR | MANAGE PATIENTS</h2>
+
+<hr>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link" href='{% url 'patienthistory' patient.id %}'><button type="button" class="btn btn-success">Medical History</button></a>
+  </li>
+
+  <li class="nav-item">
+		<a class="nav-link " href='{% url 'doctorvitalsigns' patient.id %}'><button type="button" class="btn btn-success">Vital Signs History</button></a>	
+	</li>
+
+	<li class="nav-item">
+		<a class="nav-link " href='{% url 'patientlabhistory' patient.id %}'><button type="button" class="btn btn-success">Lab History</button></a>	
+	</li>
+	<li class="nav-item">
+		<a class="nav-link active" href='{% url 'patientradiologyhistory' patient.id %}'><button type="button" class="btn btn-primary">Radiology History</button></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href='{% url 'patientlprescriptionhistory' patient.id %}'><button type="button" class="btn btn-success">Prescription History</button></a>
+	</li>
+
+</ul>
+<hr>
+
+<h3>Patient Radiology History</h3>
+
+{% for radiologyorder in radiologyorders%}
+<div class="card" style="margin-top: 1rem;">
+  <div class="card-header">
+    <div>
+        <div style="display: flex; align-items: center;"><h6 style="font-weight: 400;">ordered by:  </h6><h6> &emsp; {{radiologyorder.Doctor.first_name}} {{radiologyorder.Doctor.last_name}}</h5></div>
+        <div style="display: flex;"><h6 style="font-weight: 400;">Specalization: </h6><h6> &emsp; {{radiologyorder.Doctor.Specalization}} </h6> </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Imaging modality : {{radiologyorder.imagingtype}}</h5>
+    <p class="card-text"><strong>Description : </strong>{{radiologyorder.description}}</p>
+  </div>
+  <div class="card-footer">
+        <a href="{% url 'doctorradiologyresult' radiologyorder.id %}"> <button type="button" class="btn btn-primary">Result</button></a>
+  </div>
+</div>
+{% endfor %}
+
+		
+
+{% endblock %}

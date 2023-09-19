@@ -1,0 +1,55 @@
+{% extends "doctor/doc_base.html" %}
+{%block content%}
+
+<h2>DOCTOR | MANAGE PATIENTS</h2>
+
+<hr>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+	<li class="nav-item">
+		<a class="nav-link" href='{% url 'patienthistory' patient.id %}'><button type="button" class="btn btn-success">Medical History</button></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link " href='{% url 'doctorvitalsigns' patient.id %}'><button type="button" class="btn btn-success">Vital Signs History</button></a>	
+	</li>
+	<li class="nav-item">
+		<a class="nav-link " href='{% url 'patientlabhistory' patient.id %}'><button type="button" class="btn btn-success">Lab History</button></a>	
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href='{% url 'patientradiologyhistory' patient.id %}'><button type="button" class="btn btn-success">Radiology History</button></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link active" href='{% url 'patientlprescriptionhistory' patient.id %}'><button type="button" class="btn btn-primary">Prescription History</button></a>
+	</li>
+
+</ul>
+<hr>
+
+<h3>Prescription History</h3>
+				
+{% for prescribemed in prescribemeds%}
+  <div class="card">
+	<div class="card-header" style="display: flex; justify-content: space-between;">
+		<div>Ordered By : Dr. {{prescribemed.Doctor.first_name}} {{prescribemed.Doctor.last_name}} ({{prescribemed.Doctor.Specalization}})</div>
+		<div>
+			{{prescribemed.created}}
+      		{% if prescribemed.status == True %}
+        	<button class="btn btn-success btn-sm">Picked Up</button>
+      		{%else%}
+        	<button class="btn btn-danger btn-sm">Pending</button>
+      		{% endif %}
+		</div>
+		
+	</div>
+	<div class="card-body">
+	  <blockquote class="blockquote mb-0">
+			<h5>Prescribed Medicine: {{prescribemed.medicine}}</h5>
+			<h6>Dosage: {{prescribemed.dosage}}</h6>
+			<p style="font-size: 16px;">
+				{{prescribemed.instruction}}</p>
+	  </blockquote>
+	</div>
+  </div>
+  <br/>
+{% endfor %}
+
+{% endblock %}

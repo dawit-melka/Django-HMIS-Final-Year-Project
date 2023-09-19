@@ -1,0 +1,47 @@
+{% extends "materialmanager/materialmanager_base.html" %}
+{%block content%}
+<style>
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .card-icon {
+    width: 50px;
+    height: 50px;
+    fill: white;
+  }
+  .card:hover .card-icon {
+    animation: spin 1s;
+  }
+</style>
+<div class="row">
+  <h2> Announcements </h2>
+  <hr>
+
+  {% for announcement in announcements %}
+  <div class="card" style="margin-bottom: 10px;">
+      <div style="display: flex; justify-content: space-between;" class="card-header">
+        <div>  
+        Admin: {{announcement.administrator.first_name}} {{announcement.administrator.last_name}}
+        </div>
+        <div style="display: flex;">  
+        posted on: {{announcement.created}}
+        {% if announcement.administrator == request.user.adminprofile %}
+        <form method="POST">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-sm" name= 'delete' value="{{announcement.id}}">Delete</button>
+        </form>
+        {% endif %}
+        </div>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{announcement.title}}</h5>
+        <p class="card-text">{{announcement.description}}</p>
+      </div>
+  </div>
+  {% endfor %}
+
+  <a href="{% url 'materialmanagerannouncements'%}"><button class="btn btn-success">See All Announcements</button></a>
+
+</div>
+{% endblock %}

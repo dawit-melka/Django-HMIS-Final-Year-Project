@@ -1,0 +1,74 @@
+{% extends "doctor/doc_base.html" %}
+{% block scripts%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/profile.css'%}">
+{% endblock %}
+{%block content%}
+<div class="feed">
+    <div style="margin-bottom: 2rem;">
+        <h2>DOCTOR | MANAGE PATIENT</h2>
+    </div>
+    <p style="font-size: 1.5rem;">Patient Details</p>
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <td style="font-weight: bold;">Patient Name</td>
+          <td>{{patient.first_name}}  {{patient.middle_name}}  {{patient.last_name}}</td>
+          <td style="font-weight: bold;">Patient Email</td>
+          <td>{{patient.email}} </td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">Patient Mobile Number</td>
+          <td>{{patient.phone}} </td>
+          <td style="font-weight: bold;">Patient Address</td>
+          <td>{{patient.address}} /{{patient.region}} /{{patient.city}}</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">Patient Gender</td>
+          <td>{{patient.gender}} </td>
+          <td style="font-weight: bold;">Patient Age</td>
+          <td>{{patient.get_age}} </td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">Patient Marital Status</td>
+          <td>{{patient.marital_status}} </td>
+          <td style="font-weight: bold;">Patient Blood Type</td>
+          <td>{{patient.bloodtype}} {{patient.RH}}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+<div class="post-box-1">
+  <br/>
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addmedhistoryModal">
+      Add Medical History
+    </button>
+    {%include 'doctor/add_medical_history.html'%}
+
+    <!-- #######################################orderlab############################################# -->
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#orderlabModal">
+      Order Lab
+    </button>
+    {%include 'doctor/orderlab.html'%}
+    <!-- ###########################prescribe Medicine######################################################################## -->
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#prescribemedModal">
+      Prescribe Medicine
+    </button>
+    {%include 'doctor/prescribemed.html'%}
+    <!-- ###########################reffer######################################################################## -->
+    <button type="button" data-bs-toggle="modal" data-bs-target="#radiologyModal" class="btn btn-danger"> Radiology Order</button>
+    {%include 'doctor/radiologyorder.html'%}
+
+  <br/>
+  <br/>
+
+    <p style="font-size: 1.5rem;">Patient Medical History</p>
+</div>
+
+<div style=" width: 100%; height: 10vh; display: flex; align-items: center;">
+  <a href="{% url 'patienthistory' patient.id %}"><button type="button" class="btn btn-success">View Patient History</button></a>
+</div>
+
+
+{% endblock %}

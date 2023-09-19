@@ -1,0 +1,78 @@
+{% extends "reception/rec_base.html" %}
+
+{%block content%}
+{% load crispy_forms_tags %}
+
+<h1>Register Patient</h1>
+
+    <form method="post" style="padding: 50px;" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-row" style="display: flex; justify-content: space-between;">
+          <div class="form-group col-md-3" style="margin-right: 1rem;">
+            {{ form.first_name|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-3" style="margin-right: 1rem;">
+            {{ form.middle_name|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-3">
+            {{ form.last_name|as_crispy_field }}
+          </div>
+        </div>
+        <div class="form-row" style="display: flex; justify-content: space-between;">
+            <div class="form-group col-md-1 mb-0" style="margin-right: 1rem;">
+                {{ form.gender|as_crispy_field }} 
+            </div>
+            <div class="form-group col-md-2 mb-0" style="margin-right: 1rem;">
+                {{ form.dateofbirth|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0" style="margin-right: 1rem;">
+                {{ form.marital_status|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-1 mb-0" >
+                {{ form.bloodtype|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-1 mb-0">
+                {{ form.RH|as_crispy_field }}
+            </div>
+        </div>
+        
+        
+        <div class="form-row" style="display: flex; justify-content: space-between;">
+            <div class="form-group col-md-6 mb-0" style="margin-right: 1rem;">
+              {{ form.phone|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0" >
+              {{ form.email|as_crispy_field }}
+            </div>
+            
+        </div>
+        
+        <div class="form-row" style="display: flex; justify-content: space-between;">
+            <div class="form-group col-md-3 mb-0" style="margin-right: 1rem;">
+                {{ form.region|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0" style="margin-right: 1rem;">
+                {{ form.city|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0" style="margin-right: 1rem;">
+                {{ form.address|as_crispy_field }}
+            </div>
+          </div>
+
+          <div class="form-row" style="display: flex; justify-content: space-between;">
+            <div class="form-group col-md-3 mb-0" style="margin-right: 1rem;">
+                {{ form.emergency_contact_name|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0" style="margin-right: 1rem;">
+                {{ form.relationship|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0" >
+                {{ form.contact_phone|as_crispy_field }}
+            </div>
+          </div>
+        
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+
+{% endblock%}

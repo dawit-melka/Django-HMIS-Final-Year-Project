@@ -1,0 +1,87 @@
+{% extends "reception/messages/messages_base.html" %}
+{%block messages %}
+<!-- chatbox -->
+<div class="chatbox">
+    <div class="modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="msg-head">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1 ms-3">
+                                <h3>{{user.username}}</h3>
+                                <p>{{user.groups.all.0}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <ul class="moreoption">
+                            <li class="navbar nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal-body">
+                <div class="msg-body">
+                    <ul>
+                    
+                        {% for message in messageslist %}
+                        
+                        {% if message.sender == request.user and message.receiver == user %}
+
+                        <li class="sender">
+                            <p> {{message.body}} </p>
+                            <span class="time">{{message.created|time}}</span>
+                        </li>
+                        
+                        {% elif message.sender == user and message.receiver == request.user %}
+                        <li class="repaly">
+                            <p> {{message.body}} </p>
+                            <span class="time">{{message.created|time}}</span>
+                        </li>
+                        {% endif %}
+                        
+                        {% endfor %}        
+
+                    </ul>
+                </div>
+            </div>
+
+            
+            <div class="send-box">
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="message"  class="form-control" aria-label="message…" placeholder="Write message…">
+
+                    <button type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</button>
+                </form>
+
+                <div class="send-btns">
+                    <div class="attach">
+                        <div class="button-wrapper">
+                            <span class="label">
+                                <img class="img-fluid" src="https://mehedihtml.com/chatbox/assets/img/upload.svg" alt="image title"> attached file 
+                            </span><input type="file" name="upload" id="upload" class="upload-box" placeholder="Upload File" aria-label="Upload File">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- chatbox -->
+{% endblock%}

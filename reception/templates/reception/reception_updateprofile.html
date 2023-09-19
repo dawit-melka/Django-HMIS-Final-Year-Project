@@ -1,0 +1,15 @@
+{% extends "reception/rec_base.html" %}
+{%block content%}
+<div>
+<h1>Update Profile</h1>
+    {% load crispy_forms_tags %}
+    <div class="container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{profile_form|crispy}}
+        <input type="submit" value="Update" class="btn btn-success">
+    </form>
+    </div>
+</div>
+    
+{% endblock %}

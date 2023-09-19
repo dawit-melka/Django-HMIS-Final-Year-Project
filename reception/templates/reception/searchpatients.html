@@ -1,0 +1,43 @@
+{% extends "reception/rec_base.html" %}
+{%block content%}
+<div>
+<h1>Search Patient</h1>
+<form action="{% url 'searchpatients' %}">
+<div class="input-group mb-3">
+    <input type="text" name='search' class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit" >Search</button>
+    </div>
+  </div>
+  <div>
+    <a href="{% url 'export-pdf' %}" class="btn btn-sm btn-danger" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Export PDF</a>
+    <a href="{% url 'export-excel' %}" class="btn btn-sm btn-success"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Excel</a> 
+  </div>
+</form>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Patient ID #</th>
+        <th scope="col">Patient Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Phone</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Book Appointment</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for patient in patients %}
+      <tr>
+        <th scope="row">{{patient.id}}</th>
+        <td><a href="{% url 'patientprofile' patient.id%}"> {{patient.first_name}} {{patient.middle_name}} {{patient.last_name}}</a></td>
+        <td>{{patient.get_age}}</td>
+        <td>{{patient.phone}}</td>
+        <td>{{patient.email}}</td>
+        <td><a href="{% url 'bookappointmentfromprofile' patient.id %}" class="btn btn-success">Book Appointment</a>   </td>
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+{% endblock%}

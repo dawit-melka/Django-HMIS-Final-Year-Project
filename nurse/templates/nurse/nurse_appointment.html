@@ -1,0 +1,57 @@
+{% extends "nurse/nurse_base.html" %}
+{%block content%}
+<h1>Appointments</h1>
+<form action="{% url 'doctorappointments' %}">
+<div class="input-group mb-3">
+  <input style="margin-top: 1rem;" type="text" name='search' class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="submit" style="margin-top: 1rem;">Search</button>
+  </div>
+</div>
+</form>
+<form style="margin-top: 1rem;" method="POST">
+  {% csrf_token %}
+  <button type="submit" value="today" name="today" class="btn btn-warning">Today's</button>
+  <button type="submit" value="alltime" name="alltime" class="btn btn-warning">All Time</button>
+</form>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Patient Name</th>
+        <th scope="col">Appointment Reason</th>
+        <th scope="col">Appointment Date/Time</th>
+        <th scope="col">Appointment Creation Date</th>
+        <th scope="col">Current Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for appointment in appointments %}
+      <tr>
+        <td scope="row"><a href="{% url 'vitalsigns' appointment.Patient.id%}"> {{appointment.Patient.first_name}} {{appointment.Patient.middle_name}} {{appointment.Patient.last_name}} </a></td>
+        <td>{{appointment.reason}}</td>
+        <td>{{appointment.date}} / {{appointment.time}}</td>
+        <td>{{appointment.created}}</td>
+        <td>
+          {% if appointment.status == True %} 
+          Active
+          {%else%}
+          Canceled 
+          {% endif %}
+        </td>
+        <td>
+          <form method="POST">
+            {% csrf_token %}
+            
+            {% if appointment.status == True %} 
+            <button class="btn btn-danger btn-sm" type="submit" value="{{appointment.id}}" name="appointment_id">Cancel</button>
+            {% else %}
+            <button class="btn btn-success btn-sm" type="submit" value="{{appointment.id}}" name="appointment_id">Uncancel</button>
+            {% endif %}
+          </form>
+        </td>
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "materialmanager/materialmanager_base.html" %}
+
+{%block content%}
+
+{% load crispy_forms_tags %}
+
+<h1>Register Medical Equipment</h1>
+
+    <form method="POST" style="padding: 50px;" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-row" style="display: flex; justify-content: space-between;">
+          <div class="form-group col-md-3" style="margin-right: 1rem;">
+            {{ form.inventory_number|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-3" style="margin-right: 1rem;">
+            {{ form.equipment_name|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-3">
+            {{ form.equipment_type|as_crispy_field }}
+          </div>
+        </div>
+
+        <div class="form-row" style="display: flex; justify-content: space-between;">
+          <div class="form-group col-md-3" style="margin-right: 1rem;">
+            {{ form.manufacturer|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-3" style="margin-right: 1rem;">
+            {{ form.model|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-3">
+            {{ form.serial_number|as_crispy_field }}
+          </div>
+        </div>
+
+        <div class="form-row" style="display: flex; justify-content: space-between;">
+          <div class="form-group col-md-3" style="margin-right: 1rem;">
+            {{ form.country_of_origin|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-3" style="margin-right: 1rem;">
+            {{ form.year_of_manufacture|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-3">
+            {{ form.warranty_expired_date|as_crispy_field }}
+          </div>
+        </div>
+        
+        
+        
+        <div class="form-row" style="display: flex; justify-content: space-between;">
+          <div class="form-group col-md-3 mb-0" style="margin-right: 1rem;">
+            {{ form.clinical_department|as_crispy_field }}
+          </div>
+            <div class="form-group col-md-3 mb-0" style="margin-right: 1rem;">
+                {{ form.power_requirment|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0" style="margin-right: 1rem;">
+                {{ form.spare_parts_available|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0" style="margin-right: 1rem;">
+                {{ form.manuals_available|as_crispy_field }}
+            </div>
+          </div>
+          <div class="form-row" style="display: flex; justify-content: space-between;">
+            <div class="form-group col-md-5 mb-0" style="margin-right: 1rem;">
+              {{ form.manual_file|as_crispy_field }}
+            </div> 
+          </div>
+        
+        <input type="submit" value="Register" class="btn btn-primary">
+      </form>
+
+{% endblock%}

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nurse</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+    {% block scripts%}
+    {% endblock %}
+    <style>
+
+        .card-number {
+          font-size: 4rem;
+          font-weight: bold;
+          position: relative;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+
+        .card-icon {
+            position: relative;
+            top: 10px;
+            right: 10px;
+            width: 100px;
+            height:100px;
+          }
+
+          .btn-custom {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border-radius: 10px;
+            color: #fff;
+            background-color:indigo;
+            border-color: #007bff;
+            transition: all 0.3s ease;
+          }
+        
+          .btn-custom:before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            background-color: #fff;
+            opacity: 0.5;
+            border-radius: 50%;
+          }
+        
+          .btn-custom:hover:before {
+            width: 200px;
+            height: 200px;
+          }
+      </style>
+
+</head>
+<body>
+    <div class="sidebar" style="position: fixed; height: 100vh;">
+        <div class="top">
+            <div class="logo">
+                <i class="bx bx-shield-alt"></i>
+                <span>Nurse</span>
+            </div>
+            <i class="bx bx-menu" id="btn"></i>
+        </div>
+        <div class="user">
+            <div style="display:inline-block">
+              {% if request.user.nurseprofile.profile_picture.url != None%}
+                <img src="{{ request.user.nurseprofile.profile_picture.url }}" class="user-img"> 
+              {% else %}
+                <img src="https://bootstrapious.com/i/snippets/sn-v-nav/avatar.png" class="user-img">
+              {% endif %}
+            </div>
+            <p class="bold">{{request.user.nurseprofile.first_name}} {{request.user.nurseprofile.last_name}}</p>
+        </div>
+
+        <ul>
+            <li>
+                <a href="{% url 'nursehome'%}">
+                    <i class="bx bxs-grid-alt"></i>
+                    <span class="nav-item">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+    
+            <li>
+                <a href="{% url 'vitalsignregistersearch'%}">
+                    <i class="fa fa-heartbeat mr-3"></i>
+                    <span class="nav-item">Record Vital Signs</span>
+                </a>
+                <span class="tooltip">Record Vital Signs</span>
+            </li>
+    
+            <li>
+                <a href="{% url 'registerbirth'%}">
+                    <i class="fa fa-address-card mr-3"></i>
+                    <span class="nav-item"> Register Birth </span>
+                </a>
+                <span class="tooltip">Register Birth</span>
+            </li>
+
+            <li>
+                <a href="{% url 'birthregistrations'%}">
+                    <i class="fa fa-history mr-3"></i>
+                    <span class="nav-item"> Birth Registrations</span>
+                </a>
+                <span class="tooltip">Birth Registrations</span>
+            </li>
+
+            <li>
+                <a href="{% url 'registerdeath'%}">
+                    <i class="fa fa-address-book mr-3"></i>
+                    <span class="nav-item"> Register Death </span>
+                </a>
+                <span class="tooltip">Register Death</span>
+            </li>
+    
+            <li>
+                <a href="{% url 'nurseappointments'%}">
+                    <i class="bx bxs-food-menu"></i>
+                    <span class="nav-item">Appointment</span>
+                </a>
+                <span class="tooltip">Appointment</span>
+            </li>
+            <li>
+                <a href="{% url 'nursemessages'%}">
+                    <i class="fa fa-comments mr-3"></i>
+                    <span class="nav-item">Messages</span>
+                </a>
+                <span class="tooltip">Messages</span>
+            </li>
+    
+            <li>
+                <a href="{% url 'updatenurseprofile'%}">
+                    <i class="fa fa-user mr-3"></i>
+                    <span class="nav-item">Update Profile</span>
+                </a>
+                <span class="tooltip">Update Profile</span>
+            </li>
+    
+            <li>
+                <a href="{% url 'logout'%}">
+                    <i class="bx bx-log-out"></i>
+                    <span class="nav-item">Logout</span>
+                </a>
+                <span class="tooltip">Logout</span>
+            </li>
+    
+        </ul>
+    </div>
+    <div class="main-content" style="padding:80px">
+        <div class="container" style="justify-content: center;">
+            {% block content%}
+
+            {% endblock %}
+        </div>
+    </div>
+</body>
+
+<script>
+    let btn = document.querySelector('#btn')
+    let sidebar = document.querySelector('.sidebar')
+
+    // Function to toggle sidebar based on window width
+    function toggleSidebar() {
+        if (window.innerWidth <= 768) {
+            sidebar.classList.remove('active');
+        } else {
+            sidebar.classList.add('active');
+        }
+    }
+
+    // Initialize the sidebar
+    toggleSidebar();
+
+    // Toggle sidebar on button click
+    btn.onclick = function() {
+        sidebar.classList.toggle('active');
+    };
+
+    // Toggle sidebar on window resize
+    window.addEventListener('resize', toggleSidebar);
+</script>
+
+</html>

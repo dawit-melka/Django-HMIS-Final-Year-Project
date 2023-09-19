@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<nav class="navbar navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'login' %}"><h4>PSMIS</h4></a>
+      <a class="navbar-brand" href="{% url 'login' %}">Go Back</a>
+    </div>
+  </nav>
+<body>
+
+    <div class="container" style="margin-top: 5rem;">
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; column-gap: 1.5rem; row-gap: 3rem;">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title" style="margin-bottom: 2rem;">Register Reception</h3>
+                    <a href="{% url 'registerreception' %}" class="btn btn-primary">Register</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title" style="margin-bottom: 2rem;">Register Cashier</h3>
+                    <a href="{% url 'registercashier' %}" class="btn btn-primary">Register</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title" style="margin-bottom: 1rem;">Register Nurse</h3>
+                    <a href="{% url 'registernurse' %}" class="btn btn-primary">Register</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title" style="margin-bottom: 1rem;">Register Doctor</h3>
+                    <a href="{% url 'registerdoctor' %}" class="btn btn-primary">Register</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title" style="margin-bottom: 1rem;">Register Lab Technician</h3>
+                    <a href="{% url 'registerlabtechnician' %}" class="btn btn-primary">Register</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title" style="margin-bottom: 1rem;">Register Radiologist</h3>
+                    <a href="{% url 'registerradiologist' %}" class="btn btn-primary">Register</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title" style="margin-bottom: 1rem;">Register Pharmacist</h3>
+                    <a href="{% url 'registerpharmacist' %}" class="btn btn-primary">Register</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title" style="margin-bottom: 1rem;">Register Inventory Manager</h3>
+                    <a href="{% url 'registermaterialmanager' %}" class="btn btn-primary">Register</a>
+                </div>
+            </div>
+
+        <div>
+        
+        
+    </div>
+    
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>    
+</body>
+</html>

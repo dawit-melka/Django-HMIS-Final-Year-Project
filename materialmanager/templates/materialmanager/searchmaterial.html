@@ -1,0 +1,41 @@
+{% extends "materialmanager/materialmanager_base.html" %}
+{%block content%}
+<div>
+<h3>Search Medical Equipment</h3>
+<form action="{% url 'searchmaterial' %}">
+<div class="input-group mb-3">
+    <input type="text" name='search' class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit" >Search</button>
+    </div>
+  </div>
+</form>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Inventory Number</th>
+        <th scope="col">Equipment Name</th>
+        <th scope="col">Equipment Type</th>
+        <th scope="col">Manufacturer</th>
+        <th scope="col">Model</th>
+        <th scope="col">Serial Number</th>
+        <th scope="col">Country of Origin</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for material in materials %}
+      <tr>
+        <th scope="row"><a href="{% url 'material' material.inventory_number %}"> {{material.inventory_number}} </a></th>
+        <td>{{material.equipment_name}}</td>
+        <td>{{material.equipment_type}}</td>
+        <td>{{material.manufacturer}}</td>
+        <td>{{material.model}}</td>
+        <td>{{material.serial_number}}  </td>
+        <td>{{material.country_of_origin}}  </td>
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+{% endblock%}

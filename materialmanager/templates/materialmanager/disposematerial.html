@@ -1,0 +1,60 @@
+{% extends "materialmanager/materialmanager_base.html" %}
+
+{%block content%}
+
+{% load crispy_forms_tags %}
+
+<h3>Dispose Medical Equipment</h3>
+<br/>
+<h4>Search Inventory</h4>
+<form action="{% url 'disposematerial' %}">
+<div class="input-group mb-3">
+    <input type="text" name='search' class="form-control" placeholder="Find by Inventory number or Serial Number" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit" >Search</button>
+    </div>
+  </div>
+</form>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Inventory Number</th>
+        <th scope="col">Equipment Name</th>
+        <th scope="col">Equipment Type</th>
+        <th scope="col">Manufacturer</th>
+        <th scope="col">Model</th>
+        <th scope="col">Serial Number</th>
+        <th scope="col">Country of Origin</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for material in materials %}
+      <tr>
+        <th scope="row"><a href="{% url 'material' material.inventory_number %}"> {{material.inventory_number}} </a></th>
+        <td> {{material.equipment_name}}</td>
+        <td>{{material.equipment_type}}</td>
+        <td>{{material.manufacturer}}</td>
+        <td>{{material.model}}</td>
+        <td>{{material.serial_number}}  </td>
+        <td>{{material.country_of_origin}}  </td>
+        <td>
+            {% if material.dispose == False %} 
+            <form method="POST">
+            {% csrf_token %}
+                <button class="btn btn-danger btn-sm" type="submit" value="{{material.inventory_number}}" name="inventory_number">Dispose</button>
+            </form>
+            {% else %}
+            <button class="btn btn-secondary btn-sm">Disposed</button>
+            {% endif %}
+        </td>
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+    
+
+{% endblock%}

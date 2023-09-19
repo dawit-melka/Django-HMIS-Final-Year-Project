@@ -1,0 +1,40 @@
+{% extends "doctor/doc_base.html" %}
+{%block content%}
+
+<h2>DOCTOR | MANAGE PATIENTS</h2>
+<hr>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+	<li class="nav-item">
+		<a class="nav-link active" href='{% url 'patienthistory' patient.id %}'><button type="button" class="btn btn-primary">Medical History</button></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link " href='{% url 'doctorvitalsigns' patient.id %}'><button type="button" class="btn btn-success">Vital Signs History</button></a>	
+	</li>
+	<li class="nav-item">
+		<a class="nav-link " href='{% url 'patientlabhistory' patient.id %}'><button type="button" class="btn btn-success">Lab History</button></a>	
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href='{% url 'patientradiologyhistory' patient.id %}'><button type="button" class="btn btn-success">Radiology History</button></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href='{% url 'patientlprescriptionhistory' patient.id %}'><button type="button" class="btn btn-success">Prescription History</button></a>
+	</li>
+</ul>
+<hr>
+<h3 style="font-size: 1.5rem; margin-top:1rem">Patient Medical History</h3>		
+	{% for medicalhistory in medicalhistorys%}
+		<div class="card">
+		<div class="card-header" style="display: flex; justify-content: space-between;">
+			<div>Written By : Dr. {{medicalhistory.Doctor.first_name}} {{medicalhistory.Doctor.last_name}} ({{medicalhistory.Doctor.Specalization}})</div>
+			<div>{{medicalhistory.created}}</div>
+		</div>
+		<div class="card-body">
+			<blockquote class="blockquote mb-0">
+			<p>{{medicalhistory.report}}</p>
+			</blockquote>
+		</div>
+		</div>
+		<br/>
+	{% endfor %}
+
+{% endblock %}

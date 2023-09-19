@@ -1,0 +1,99 @@
+{% extends "nurse/nurse_base.html" %}
+{%block content%}
+<div class="feed">
+    <a href="{% url 'birthregistrations' %}"> <button class="btn btn-success">Go Back </button></a>
+    <a class="btn btn-danger" href="{% url 'birthcertificate' baby.id %}" target="_blank">Export PDF</a>
+    <h2>Baby Detail</h2>
+    <hr>
+    <h4> Baby Information</h4>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+            <td style="font-weight: bold;">Name</td>
+            <td>{{baby.first_name}}  {{baby.middle_name}}  {{baby.last_name}}</td>
+            <td style="font-weight: bold;">Gender</td>
+            <td>{{baby.gender}} </td>
+            </tr>
+            <tr>
+            <td style="font-weight: bold;">Date of Birth</td>
+            <td>{{baby.date_of_birth}} </td>
+            <td style="font-weight: bold;">Time of Birth</td>
+            <td>{{baby.time_of_birth}}</td>
+            </tr>
+            <tr>
+            <td style="font-weight: bold;">Weight</td>
+            <td>{{baby.birth_weight}} </td>
+            <td style="font-weight: bold;">Height</td>
+            <td>{{baby.birth_length}} </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+    <h4>Mother's Information</h4>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+            <td style="font-weight: bold;">Mother's Name</td>
+            <td>{{baby.mother_first_name}}  {{baby.mother_middle_name}}  {{baby.mother_last_name}}</td>
+            <td style="font-weight: bold;">Date of Birth</td>
+            <td>{{baby.mother_date_of_birth}} </td>
+            </tr>
+            <tr>
+            <td style="font-weight: bold;">Nationality</td>
+            <td>{{baby.mother_nationality}} </td>
+            <td style="font-weight: bold;">Occupation</td>
+            <td>{{baby.mother_occupation}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h4>Father's Information</h4>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+            <td style="font-weight: bold;">Father's Name</td>
+            <td>{{baby.father_first_name}}  {{baby.father_middle_name}}  {{baby.father_last_name}}</td>
+            <td style="font-weight: bold;">Date of Birth</td>
+            <td>{{baby.mother_date_of_birth}} </td>
+            </tr>
+            <tr>
+            <td style="font-weight: bold;">Nationality</td>
+            <td>{{baby.father_nationality}} </td>
+            <td style="font-weight: bold;">Occupation</td>
+            <td>{{baby.father_occupation}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h4>Address</h4>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+            <td style="font-weight: bold;">Address</td>
+            <td>{{baby.address}} </td>
+            <td style="font-weight: bold;">Region/City</td>
+            <td>{{baby.region}} / {{baby.city}} </td>
+            </tr>
+            <tr>
+            <td style="font-weight: bold;">E-mail</td>
+            <td>{{baby.email}} </td>
+            <td style="font-weight: bold;">Phone</td>
+            <td>{{baby.phone}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+        
+    </div>
+
+{% endblock %}

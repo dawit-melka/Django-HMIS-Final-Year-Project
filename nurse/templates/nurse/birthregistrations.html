@@ -1,0 +1,37 @@
+{% extends "nurse/nurse_base.html" %}
+{%block content%}
+<h1>Born Babies</h1>
+<form action="{% url 'birthregistrations' %}">
+<div class="input-group mb-3">
+  <input style="margin-top: 1rem;" type="text" name='search' class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="submit" style="margin-top: 1rem;">Search</button>
+  </div>
+</div>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Baby Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Weight</th>
+        <th scope="col">Height</th>
+        <th scope="col">Mother's Name</th>
+        <th scope="col">Father's Name</th>
+        <th scope="col">Birth Date and Time</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for baby in birthregistrations %}
+      <tr>
+        <td scope="row"><a href={% url 'babyinfo' baby.id %}>{{baby.first_name}} {{baby.middle_name}} {{baby.last_name}} </a></td>
+        <td>{{baby.gender}}</td>
+        <td>{{baby.birth_weight}}</td>
+        <td>{{baby.birth_length}}</td>
+        <td>{{baby.mother_first_name}} {{baby.mother_middle_name}} {{baby.mother_last_name}}</td>
+        <td>{{baby.father_first_name}} {{baby.father_middle_name}} {{baby.father_last_name}}</td>
+        <td>{{baby.date_of_birth}} / {{baby.time_of_birth}}</td>
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

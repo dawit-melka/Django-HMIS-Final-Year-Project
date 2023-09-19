@@ -1,0 +1,53 @@
+<div class="modal fade modal-lg" id="orderlabModal" tabindex="-1" aria-labelledby="orderlabLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Order Lab</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {% load crispy_forms_tags %}
+          <form method="POST" action="{% url 'orderlab' patient.id%}">
+            {% csrf_token %}
+            <div class="form-row" style="display: flex; justify-content: space-between;">
+              <div class="form-group col-md-5 mb-0" style="margin-right: 1rem;">
+                {{ orderlabform.sample_type|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-5 mb-0" >
+                {{ orderlabform.fasting|as_crispy_field }}
+              </div>
+            </div>
+            <div class="form-row" style="display: flex; justify-content: space-between;">
+              <div class="form-group col-md-2 mb-0" style="margin-right: 1rem;">
+                {{ orderlabform.profile_test|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-2 mb-0" >
+                {{ orderlabform.biochemistry_test|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-2 mb-0" >
+                {{ orderlabform.hematology_test|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-3 mb-0" >
+                {{ orderlabform.microbiology_test|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-2 mb-0" >
+                {{ orderlabform.anatomical_pathology_test|as_crispy_field }}
+              </div>
+          </div>
+          <div class="form-row" style="display: flex; justify-content: space-between;">
+            <div class="form-group col-md-5 mb-0" style="margin-right: 1rem;">
+              {{ orderlabform.additional_tests|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-5 mb-0" >
+              {{ orderlabform.note|as_crispy_field }}
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success">Order</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>

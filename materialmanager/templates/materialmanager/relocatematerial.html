@@ -1,0 +1,10 @@
+{% extends "materialmanager/materialmanager_base.html" %}
+{%block content%}
+<h3>Medical Equipment Relocation</h3>
+{% load crispy_forms_tags %}
+<form method="POST">
+  {% csrf_token %}
+  {{forms|crispy}}
+  <input type="submit" value="Relocate" class="btn btn-success">
+</form>
+{% endblock %}
