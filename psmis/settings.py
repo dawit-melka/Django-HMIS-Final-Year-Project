@@ -154,9 +154,9 @@ EMAIL_HOST = 'smtp.gmail.com'
 
 EMAIL_PORT = '587'
 
-EMAIL_HOST_USER = 'psmissystem@gmail.com'
+EMAIL_HOST_USER = 'enter your email'
 
-EMAIL_HOST_PASSWORD = 'ogvkttvldkuunjwa'
+EMAIL_HOST_PASSWORD = 'enter the password'
 
 EMAIL_USE_TLS = True
 
