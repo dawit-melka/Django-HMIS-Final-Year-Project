@@ -1,0 +1,30 @@
+{% extends "administrator/admin_base.html" %}
+{%block content%}
+
+<div style="margin: -20px; width: 90%;">
+
+    <a href="{% url 'patientsreport' %}" class="btn btn-primary">Patients Report</a>
+    <a href="{% url 'staffsreport' %}" class="btn btn-success">Staffs Report</a>
+    <a href="{% url 'financialreport' %}" class="btn btn-success">Payment Report</a>
+    <br>
+    <br>
+
+    <h1>Patients Report</h1>
+    <br>
+    <div>
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Download Patients Data</h5>
+              <a href="{% url 'export-pdf' %}" class="btn btn-danger" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Export PDF</a>
+              <a href="{% url 'export-excel' %}" class="btn btn-success"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Excel</a> 
+            </div>
+        </div>
+
+        <hr>
+        
+        
+            <img src="data:image/png;base64,{{ chart }}">
+        
+    </div>
+</div>
+{% endblock%}

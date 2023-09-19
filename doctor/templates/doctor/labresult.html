@@ -1,0 +1,286 @@
+{% extends "doctor/doc_base.html" %}
+{%block content%}
+<h2>Lab Order Result</h2>
+<hr>
+{% if laborder.profile_test.all %}
+<h4>Profile Test Result</h4>
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Test</th>
+            <th scope="col">Value</th>
+            <th scope="col">Normal Range</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">G2000</th>
+            <td>{{profiletestresult.G2000}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">G 2000-X</th>
+            <td>{{profiletestresult.G2000_x}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">GT9</th>
+            <td>{{profiletestresult.GT9}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">GTI</th>
+            <td>{{profiletestresult.GTI}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">NEO</th>
+            <td>{{profiletestresult.NEO}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">ES</th>
+            <td>{{profiletestresult.ES}}</td>
+            <td> 0-15 mm/hour (men), 0-20 mm/hour (women) </td>
+        </tr>
+        <tr>
+            <th scope="row">HB3</th>
+            <td>{{profiletestresult.HB3}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">DFS</th>
+            <td>{{profiletestresult.DFS}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">LFT </th>
+            <td>{{profiletestresult.LFT}}</td>
+            <td>AST: 10-40 U/L, ALT: 7-56 U/L, ALP: 44-147 U/L</td>
+        </tr>
+        <tr>
+            <th scope="row">RFT </th>
+            <td>{{profiletestresult.RFT}}</td>
+            <td>BUN: 7-20 mg/dL, Creatinine: 0.84-1.21 mg/dL (men), 0.74-1.07 mg/dL (women)</td>
+        </tr>
+        <tr>
+            <th scope="row">TFT </th>
+            <td>{{profiletestresult.TFT}}</td>
+            <td>TSH: 0.4-4.0 mIU/L, Free T4: 0.9-1.7 ng/dL, Free T3: 2.0-4.4 pg/mL  </td>
+        </tr>
+        <tr>
+            <th scope="row">MAC</th>
+            <td>{{profiletestresult.MAC}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">LGL</th>
+            <td>{{profiletestresult.LGL}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">LIP</th>
+            <td>{{profiletestresult.LIP}}</td>
+            <td> - </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if laborder.biochemistry_test.all %}
+<h4>BioChemistry Test Result</h4>
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Test</th>
+            <th scope="col">Value</th>
+            <th scope="col">Normal Range</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">CEA</th>
+            <td>{{biochemistrytestresult.CEA}}</td>
+            <td> < 3.0 ng/mL (non-smokers), < 5.0 ng/mL (smokers) </td>
+        </tr>
+        <tr>
+            <th scope="row">CA 1</th>
+            <td>{{biochemistrytestresult.CA1}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">CA 5</th>
+            <td>{{biochemistrytestresult.CA5}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">CA 9</th>
+            <td>{{biochemistrytestresult.CA9}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">PSA</th>
+            <td>{{biochemistrytestresult.PSA}}</td>
+            <td>< 4.0 ng/mL DecimalField</td>
+        </tr>
+        <tr>
+            <th scope="row">AFP</th>
+            <td>{{biochemistrytestresult.AFP}}</td>
+            <td> < 10 ng/mL</td>
+        </tr>
+        <tr>
+            <th scope="row">Glucose</th>
+            <td>{{biochemistrytestresult.Glucose}}</td>
+            <td> 70-99 mg/dL </td>
+        </tr>
+        <tr>
+            <th scope="row">HIV 1&2</th>
+            <td>{{biochemistrytestresult.HIV1_2}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">HbA1c</th>
+            <td>{{biochemistrytestresult.HbA1c}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">HBsAg</th>
+            <td>{{biochemistrytestresult.HBsAg}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">H. pylori</th>
+            <td>{{biochemistrytestresult.H_pylori}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">Uric Acid</th>
+            <td>{{biochemistrytestresult.Uric_Acid}}</td>
+            <td> 3.4-7.0 mg/dL (men), 2.4-6.0 mg/dL (women) </td>
+        </tr>
+        <tr>
+            <th scope="row">Free T4</th>
+            <td>{{biochemistrytestresult.Free_T4}}</td>
+            <td> 0.9-1.7 ng/dL </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if laborder.hematology_test.all %}
+<h4>Hematology Test Result</h4>
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Test</th>
+            <th scope="col">Value</th>
+            <th scope="col">Normal Range</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">FBE</th>
+            <td>{{hematologyresult.FBE}}</td>
+            <td> Hemoglobin: 13.5-17.5 g/dL (men), 12.0-15.5 g/dL (women) </td>
+        </tr>
+        <tr>
+            <th scope="row">FBC</th>
+            <td>{{hematologyresult.FBC}}</td>
+            <td> Hemoglobin: 13.5-17.5 g/dL (men), 12.0-15.5 g/dL (women) </td>
+        </tr>
+        <tr>
+            <th scope="row">Hb(Hemoglobin)</th>
+            <td>{{hematologyresult.Hb}}</td>
+            <td> Hemoglobin: 13.5-17.5 g/dL (men), 12.0-15.5 g/dL (women) </td>
+        </tr>
+        <tr>
+            <th scope="row">TWDC</th>
+            <td>{{hematologyresult.TWDC}}</td>
+            <td> 4,000-11,000 cells/mcL </td>
+        </tr>
+        <tr>
+            <th scope="row">Platelets</th>
+            <td>{{hematologyresult.Platelets}}</td>
+            <td> 150,000-450,000 platelets/mcL  </td>
+        </tr>
+        <tr>
+            <th scope="row">ABO & Rh(D)</th>
+            <td>{{hematologyresult.ABO_Rh}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">Malaria parasites</th>
+            <td>{{hematologyresult.Malaria}}</td>
+            <td> Negative </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if laborder.microbiology_test.all %}
+<h4>Microbiology Test Result</h4>
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Test</th>
+            <th scope="col">Value</th>
+            <th scope="col">Normal Range</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">Urine FEME</th>
+            <td>{{microbiologyresult.Urine_FEME}}</td>
+            <td>RBCs: 0-2 per high power field (HPF) </td>
+        </tr>
+        <tr>
+            <th scope="row">RPR (VDRL) </th>
+            <td>{{microbiologyresult.RPR}}</td>
+            <td> - </td>
+        </tr>
+        <tr>
+            <th scope="row">Microscopy/Culture/Sensitivity:</th>
+            <td>{{microbiologyresult.Microscopy}}</td>
+            <td> No growth or specific organism identified </td>
+        </tr>
+        <tr>
+            <th scope="row">AFB (ZN) Smear Only</th>
+            <td>{{microbiologyresult.AFB_ZN}}</td>
+            <td>   No AFB seen </td>
+        </tr>
+        <tr>
+            <th scope="row">AFB Smear & Culture</th>
+            <td>{{microbiologyresult.AFB}}</td>
+            <td> No growth or specific organism identified </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{% endif %}
+<hr>
+
+{% if laborder.anatomical_pathology_test.all %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Histology</h5>
+        <p class="card-text">{{anatomicalpathologyresult.Histology}}</p>
+    </div>
+</div>
+<br>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Non-Gynae/FNA (Fine Needle Aspiration)</h5>
+        <p class="card-text">{{anatomicalpathologyresult.Non_Gynae}}</p>
+    </div>
+</div>
+{% endif %}
+
+{% endblock%}

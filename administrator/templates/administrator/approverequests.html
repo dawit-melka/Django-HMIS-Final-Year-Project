@@ -1,0 +1,175 @@
+{% extends "administrator/admin_base.html" %}
+{%block content%}
+<h3>Staff Approve Requests</h3>
+<div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Role</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                {% if user.groups.all.0.name == 'Reception' and user.receptionprofile.active == False %}
+                    <tr>
+                        <th scope="row">{{user.id}}</th>
+                        <td>{{user.receptionprofile.first_name}} {{user.receptionprofile.last_name}}</td>
+                        <td>{{user.username}}</td>
+                        <td>Reception</td>
+                        <td>{{user.receptionprofile.phone}}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                            <div style="display: flex;">
+                                <a href={% url 'approvereception' user.receptionprofile.id %}><button type="button" class="btn btn-success btn-sm">Approve</button></a>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" value="{{user.id}}" name="delete" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if user.groups.all.0.name == 'Cashier' and user.cashierprofile.active == False %}
+                    <tr>
+                        <th scope="row">{{user.id}}</th>
+                        <td>{{user.cashierprofile.first_name}} {{user.cashierprofile.last_name}}</td>
+                        <td>{{user.username}}</td>
+                        <td>Cashier</td>
+                        <td>{{user.cashierprofile.phone}}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                            <div style="display: flex;">
+                                <a href={% url 'approvecashier' user.cashierprofile.id %}><button type="button" class="btn btn-success btn-sm">Approve</button></a>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" value="{{user.id}}" name="delete" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if user.groups.all.0.name == 'Nurse' and user.nurseprofile.active == False %}
+                    <tr>
+                        <th scope="row">{{user.id}}</th>
+                        <td>{{user.nurseprofile.first_name}} {{user.nurseprofile.last_name}}</td>
+                        <td>{{user.username}}</td>
+                        <td>Nurse</td>
+                        <td>{{user.nurseprofile.phone}}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                            <div style="display: flex;">
+                                <a href={% url 'approvenurse' user.nurseprofile.id %}><button type="button" class="btn btn-success btn-sm">Approve</button></a>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" value="{{user.id}}" name="delete" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if user.groups.all.0.name == 'Doctor' and user.doctorprofile.active == False %}
+                    <tr>
+                        <th scope="row">{{user.id}}</th>
+                        <td>{{user.doctorprofile.first_name}} {{user.doctorprofile.last_name}}</td>
+                        <td>{{user.username}}</td>
+                        <td>Doctor</td>
+                        <td>{{user.doctorprofile.phone}}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                            <div style="display: flex;">
+                                <a href={% url 'approvedoctor' user.doctorprofile.id %}><button type="button" class="btn btn-success btn-sm">Approve</button></a>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" value="{{user.id}}" name="delete" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if user.groups.all.0.name == 'Pharmacist' and user.pharmacistprofile.active == False %}
+                    <tr>
+                        <th scope="row">{{user.id}}</th>
+                        <td>{{user.pharmacistprofile.first_name}} {{user.pharmacistprofile.last_name}}</td>
+                        <td>{{user.username}}</td>
+                        <td>Pharmacist</td>
+                        <td>{{user.pharmacistprofile.phone}}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                            <div style="display: flex;">
+                                <a href={% url 'approverpharma' user.pharmacistprofile.id %}><button type="button" class="btn btn-success btn-sm">Approve</button></a>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" value="{{user.id}}" name="delete" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if user.groups.all.0.name == 'Radiologist' and user.radiologistprofile.active == False %}
+                    <tr>
+                        <th scope="row">{{user.id}}</th>
+                        <td>{{user.radiologistprofile.first_name}} {{user.radiologistprofile.last_name}}</td>
+                        <td>{{user.username}}</td>
+                        <td>Radiologist</td>
+                        <td>{{user.radiologistprofile.phone}}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                            <div style="display: flex;">
+                                <a href={% url 'approveradiologist' user.radiologistprofile.id %}><button type="button" class="btn btn-success btn-sm">Approve</button></a>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" value="{{user.id}}" name="delete" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if user.groups.all.0.name == 'Lab' and user.labtechnicianprofile.active == False %}
+                    <tr>
+                        <th scope="row">{{user.id}}</th>
+                        <td>{{user.labtechnicianprofile.first_name}} {{user.labtechnicianprofile.last_name}}</td>
+                        <td>{{user.username}}</td>
+                        <td>Lab Technician</td>
+                        <td>{{user.labtechnicianprofile.phone}}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                            <div style="display: flex;">
+                                <a href={% url 'approvedlab' user.labtechnicianprofile.id %}><button type="button" class="btn btn-success btn-sm">Approve</button></a>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" value="{{user.id}}" name="delete" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if user.groups.all.0.name == 'Materialmanager' and user.materialmanagerprofile.active == False %}
+                    <tr>
+                        <th scope="row">{{user.id}}</th>
+                        <td>{{user.materialmanagerprofile.first_name}} {{user.materialmanagerprofile.last_name}}</td>
+                        <td>{{user.username}}</td>
+                        <td>Materialmanager</td>
+                        <td>{{user.materialmanagerprofile.phone}}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                            <div style="display: flex;">
+                                <a href={% url 'approvematerial' user.materialmanagerprofile.id %}><button type="button" class="btn btn-success btn-sm">Approve</button></a>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" value="{{user.id}}" name="delete" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

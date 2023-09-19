@@ -1,0 +1,39 @@
+{% extends "cashier/cashier_base.html" %}
+{%block content%}
+<h1>Pharmacy Payment</h1>
+<form action="{% url 'pharmapayments' %}">
+<div class="input-group mb-3">
+  <input style="margin-top: 1rem;" type="text" name='search' class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="submit" style="margin-top: 1rem;">Search</button>
+  </div>
+</div>
+</form>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Patient ID</th>
+        <th scope="col">Patient Name</th>
+        <th scope="col">Prescribed By</th>
+        <th scope="col">Prescription Date</th>
+        <th scope="col">Payment Status</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for medicine in medicines %}
+      <tr>
+        <td>{{medicine.Patient.id}}</td>
+        <td scope="row"><a href="{% url 'cashierpatientprofile' medicine.Patient.id%}"> {{medicine.Patient.first_name}} {{medicine.Patient.middle_name}} {{medicine.Patient.last_name}} </a></td>
+        <td>{{medicine.Doctor.first_name}} {{medicine.Doctor.first_name}} ({{medicine.Doctor.Specalization}})</td>
+        <td>{{medicine.created}}</td>
+        <td>
+          <form method="POST">
+            {% csrf_token %}
+            <button class="btn btn-danger btn-sm" type="submit" value="{{medicine.id}}" name="payment_id">Pay</button>
+          </form>
+        </td>
+      </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

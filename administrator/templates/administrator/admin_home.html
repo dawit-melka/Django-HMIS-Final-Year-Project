@@ -1,0 +1,78 @@
+{% extends "administrator/admin_base.html" %}
+{%block content%}
+<style>
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .card-icon {
+    width: 50px;
+    height: 50px;
+    fill: white;
+  }
+  .card:hover .card-icon {
+    animation: spin 1s;
+  }
+</style>
+<div class="row">
+
+  <div class="col-md-4">
+    <div class="card text-white bg-danger mb-3">
+      <div class="card-body"style="display: flex;">
+        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224 256a128 128 0 1 0 0-256a128 128 0 1 0 0 256zm-96 55.2C54 332.9 0 401.3 0 482.3C0 498.7 13.3 512 29.7 512h388.6c16.4 0 29.7-13.3 29.7-29.7c0-81-54-149.4-128-171.1V362c27.6 7.1 48 32.2 48 62v40c0 8.8-7.2 16-16 16h-16c-8.8 0-16-7.2-16-16s7.2-16 16-16v-24c0-17.7-14.3-32-32-32s-32 14.3-32 32v24c8.8 0 16 7.2 16 16s-7.2 16-16 16h-16c-8.8 0-16-7.2-16-16v-40c0-29.8 20.4-54.9 48-62v-57.1c-6-.6-12.1-.9-18.3-.9h-91.4c-6.2 0-12.3.3-18.3.9v65.4c23.1 6.9 40 28.3 40 53.7c0 30.9-25.1 56-56 56s-56-25.1-56-56c0-25.4 16.9-46.8 40-53.7v-59.1zM144 448a24 24 0 1 0 0-48a24 24 0 1 0 0 48z"/></svg>
+        <h4 style="align-self: center; margin-left: 0.7rem;"> Approval Waiting &nbsp; {{pending_approvals}}</h4>
+      </div>
+    </div>
+    
+  </div>
+
+    <div class="col-md-4">
+      <a href="{% url 'patientsreport'%}" style="text-decoration:none;">
+      <div class="card text-white bg-dark mb-3">
+        <div class="card-body">
+            <div style="display: flex;">
+            <i class="fa fa-bar-chart" aria-hidden="true" style="font-size: 50px; fill: white;"></i>
+            <h3 class="card-title" style="align-self: center; margin-left: 0.7rem;">Reports</h3>
+            </div>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div>
+
+  </div>
+
+  <a href="https://youtu.be/kLglEG5DjxI" class="btn btn-info btn-sm"  target="_blank">Guide</a>
+  <br>
+  <h2> Announcements </h2>
+  <br>
+
+  {% for announcement in announcements %}
+  <div class="card">
+      <div style="display: flex; justify-content: space-between;" class="card-header">
+        <div>  
+        Admin: {{announcement.administrator.first_name}} {{announcement.administrator.last_name}}
+        </div>
+        <div style="display: flex;">  
+        posted on: {{announcement.created}}
+        {% if announcement.administrator == request.user.adminprofile %}
+        <form method="POST">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-sm" name= 'delete' value="{{announcement.id}}">Delete</button>
+        </form>
+        {% endif %}
+        </div>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{announcement.title}}</h5>
+        <p class="card-text">{{announcement.description}}</p>
+      </div>
+  </div>
+  <br>
+  {% endfor %}
+
+  <a href="{% url 'announcements'%}"><button class="btn btn-success">See All Announcements</button></a>
+  <a href="{% url 'createannouncements'%}"><button class="btn btn-primary">Create Announcement</button></a>
+
+</div>
+{% endblock %}

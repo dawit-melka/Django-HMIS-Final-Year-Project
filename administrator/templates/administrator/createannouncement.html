@@ -1,0 +1,16 @@
+{% extends "administrator/admin_base.html" %}
+{%block content%}
+<h2>Create Announcement</h2>
+<body>
+    {% load crispy_forms_tags %}
+    <div class="container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" value="Post" class="btn btn-success">
+    </form>
+</div>
+    
+</body>
+</html>
+{% endblock %}

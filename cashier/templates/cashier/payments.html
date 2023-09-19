@@ -1,0 +1,41 @@
+{% extends "cashier/cashier_base.html" %}
+{%block content%}
+<h1>Payments</h1>
+<form action="{% url 'payments' %}">
+<div class="input-group mb-3">
+  <input style="margin-top: 1rem;" type="text" name='search' class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="submit" style="margin-top: 1rem;">Search</button>
+  </div>
+</div>
+</form>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Patient ID</th>
+        <th scope="col">Patient Name</th>
+        <th scope="col">Type</th>
+        <th scope="col">Creation Date</th>
+        <th scope="col">Price</th> 
+        <th scope="col">Payment Status</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for payment in payments %}
+      <tr>
+        <td>{{payment.Patient.id}}</td>
+        <td scope="row"><a href="{% url 'cashierpatientprofile' payment.Patient.id%}"> {{payment.Patient.first_name}} {{payment.Patient.middle_name}} {{payment.Patient.last_name}} </a></td>
+        <td>{% if payment.lab != None %} Lab Order {%elif payment.imagingtype != None %} Radiology Order {%else%} Appointment {% endif %}</td>
+        <td>{{payment.created}}</td>
+        <td>{% if payment.lab %} {{payment.total_price}} {%elif payment.radio == True %} {{payment.imagingtype.price}} {%else%} {{payment.total_price}} {% endif %}</td>
+        <td>
+          <form method="POST">
+            {% csrf_token %}
+            <button class="btn btn-danger btn-sm" type="submit" value="{{payment.id}}" name="payment_id">Pay</button>
+          </form>
+        </td>
+      </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

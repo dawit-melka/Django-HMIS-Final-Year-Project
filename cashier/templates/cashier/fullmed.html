@@ -1,0 +1,81 @@
+{% extends "cashier/cashier_base.html" %}
+{% block scripts%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/profile.css'%}">
+{% endblock %}
+{%block content%}
+<div class="feed">
+    <div style="margin-bottom: 2rem;">
+        <h2>Reception | MANAGE PATIENTS PAYMENTS</h2>
+    </div>
+    <p style="font-size: 1.5rem;">Patient Details</p>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+            <td style="font-weight: bold;">Patient Name</td>
+            <td>{{patient.first_name}}  {{patient.middle_name}}  {{patient.last_name}}</td>
+            <td style="font-weight: bold;">Patient Email</td>
+            <td>{{patient.email}} </td>
+            </tr>
+            <tr>
+            <td style="font-weight: bold;">Patient Mobile Number</td>
+            <td>{{patient.phone}} </td>
+            <td style="font-weight: bold;">Patient Address</td>
+            <td>{{patient.address}} </td>
+            </tr>
+            <tr>
+            <td style="font-weight: bold;">Patient Gender</td>
+            <td>{{patient.gender}} </td>
+            <td style="font-weight: bold;">Patient Age</td>
+            <td>{{patient.get_age}} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+  <br/>
+    <h2>All Pharmacy Payment</h2>
+<hr>
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Patient ID</th>
+        <th scope="col">Patient Name</th>
+        <th scope="col">Prescribed By</th>
+        <th scope="col">Prescription Date</th>
+        <th scope="col">Status</th>
+        <th scope="col">Payment Status</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for medicine in medicines %}
+      <tr>
+        <td>{{medicine.Patient.id}}</td>
+        <td scope="row"><a href="{% url 'cashierpatientprofile' medicine.Patient.id%}"> {{medicine.Patient.first_name}} {{medicine.Patient.middle_name}} {{medicine.Patient.last_name}} </a></td>
+        <td>{{medicine.Doctor.first_name}} {{medicine.Doctor.first_name}} ({{medicine.Doctor.Specalization}})</td>
+        <td>{{medicine.created}}</td>
+        <td>{% if medicine.status == False %} Pending {%else%} Picked Up {% endif %}</td>
+        <td>
+          <form method="POST">
+            {% csrf_token %}
+            
+            {% if medicine.payment == False %} 
+            <button class="btn btn-danger btn-sm" type="submit" value="{{medicine.id}}" name="medicine_id">Pay</button>
+            {% else %}
+              {% if medicine.Cashier == request.user.cashierprofile and medicine.status == False %}
+                <button class="btn btn-success btn-sm" type="submit" value="{{medicine.id}}" name="medicine_id">Paid</button>
+              {%else%}
+                <button class="btn btn-success btn-sm">Paid</button>
+              {%endif%}
+              (cashier: {{medicine.Cashier.first_name}} {{medicine.Cashier.last_name}})
+            {% endif %}
+        </form>
+        </td>
+      </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "administrator/admin_base.html" %}
+{%block content%}
+{% load crispy_forms_tags %}
+<div style="margin: -20px; width: 90%;">
+
+  <a href="{% url 'patientsreport' %}" class="btn btn-success">Patients Report</a>
+  <a href="{% url 'staffsreport' %}" class="btn btn-success">Staffs Report</a>
+  <a href="{% url 'financialreport' %}" class="btn btn-primary">Payment Report</a>
+  <br>
+  <br>
+
+    <h1>Financial Report</h1>
+    <br>
+    <div>
+        <div class="card">
+            <div class="card-body">
+              <form method="POST">
+                {% csrf_token %}
+                {{form|crispy}}  
+                <h5 class="card-title">Download Balance Sheet</h5>
+                <a href="{% url 'banalcesheet-export-excel' %}" class="btn btn-warning">Export Excel</a>
+              </form> 
+            </div>
+        </div>
+
+        <hr>
+
+        <div>
+            <img src="data:image/png;base64,{{ chart }}">
+        </div>
+    </div>
+</div>
+{% endblock%}

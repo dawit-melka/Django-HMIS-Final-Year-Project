@@ -1,0 +1,93 @@
+{% extends "cashier/cashier_base.html" %}
+{% block scripts%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/profile.css'%}">
+{% endblock %}
+{%block content%}
+<div class="feed">
+    <div style="margin-bottom: 2rem;">
+        <h2>Reception | MANAGE PATIENTS PAYMENTS</h2>
+    </div>
+    <p style="font-size: 1.5rem;">Patient Details</p>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+            <td style="font-weight: bold;">Patient Name</td>
+            <td>{{patient.first_name}}  {{patient.middle_name}}  {{patient.last_name}}</td>
+            <td style="font-weight: bold;">Patient Email</td>
+            <td>{{patient.email}} </td>
+            </tr>
+            <tr>
+            <td style="font-weight: bold;">Patient Mobile Number</td>
+            <td>{{patient.phone}} </td>
+            <td style="font-weight: bold;">Patient Address</td>
+            <td>{{patient.address}} </td>
+            </tr>
+            <tr>
+            <td style="font-weight: bold;">Patient Gender</td>
+            <td>{{patient.gender}} </td>
+            <td style="font-weight: bold;">Patient Age</td>
+            <td>{{patient.get_age}} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+  <br/>
+    <h2>All Appointment Payment Requests</h2>
+    <hr/>
+    <div>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Patient ID</th>
+                <th scope="col">Patient Name</th>
+                <th scope="col">Doctor </th>
+                <th scope="col">Appointment Date/Time</th>
+                <th scope="col">Appointment Creation Date</th>
+                <th scope="col">Price</th>
+                <th scope="col">Current Status</th>
+                <th scope="col">Payment Status</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+              <tr>
+                <td>{{patient.id}}</td>
+                <td scope="row">{{appointment.Patient.first_name}} {{appointment.Patient.middle_name}} {{appointment.Patient.last_name}}</td>
+                <td scope="row">{{appointment.Doctor.first_name}} {{appointment.Doctor.middle_name}} {{appointment.Doctor.last_name}}({{appointment.Doctor.Specalization.specalization}})</td>
+                <td>{{appointment.date}} / {{appointment.time}}</td>
+                <td>{{appointment.created}}</td>
+                <td>{{appointment.total_price}}</td>
+                <td>
+                  {% if appointment.status == True %} 
+                  Active
+                  {%else%}
+                  Canceled 
+                  {% endif %}
+                </td>
+                <td>
+                  {% if appointment.status == True %} 
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        {% if appointment.payment == False %} 
+                        <button class="btn btn-danger btn-sm" type="submit" value="{{appointment.id}}" name="appointment_id">Pay</button>
+                        {% else %}
+                          {% if appointment.Cashier == request.user.cashierprofile %}
+                            <button class="btn btn-success btn-sm" type="submit" value="{{appointment.id}}" name="appointment_id">Paid</button>
+                          {%else%}
+                            <button class="btn btn-success btn-sm">Paid</button>
+                          {%endif%}
+                          (cashier: {{appointment.Cashier.first_name}} {{appointment.Cashier.last_name}})
+                        {% endif %}
+                    </form>
+                  {% endif %}
+                </td>
+              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+</div>
+
+{% endblock %}

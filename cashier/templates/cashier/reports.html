@@ -1,0 +1,22 @@
+{% extends "cashier/cashier_base.html" %}
+{%block content%}
+{% load crispy_forms_tags %}
+<div style="margin: -20px; width: 90%;">
+    <h1>Reports</h1>
+    <br>
+    <div>
+        <div class="card">
+            <div class="card-body">
+              <form method="POST">
+                {% csrf_token %}
+                {{form|crispy}}  
+                <h5 class="card-title">Download Balance Sheet</h5>
+                <a href="{% url 'banalcesheet-export-excel' %}" class="btn btn-warning">Export Excel</a>
+              </form> 
+            </div>
+        </div>
+
+        <hr>
+    </div>
+</div>
+{% endblock%}

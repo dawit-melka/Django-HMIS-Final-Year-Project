@@ -1,0 +1,42 @@
+{% extends "administrator/admin_base.html" %}
+{%block content%}
+<div>
+    <h3>Are you sure you want to Delete </h3>
+    <br>
+    <div style="display: flex;">
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" value="{{user.id}}" name="delete" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+</div>
+<br>
+{% if user.profile_picture.url != None%}
+<figure class="figure">
+  <img src="{{user.profile_picture.url}}" class="figure-img img-fluid rounded" height="200px" width="200px">
+  <figcaption class="figure-caption">Staff photo.</figcaption>
+</figure>
+{% endif %}
+<table class="table">
+    <tbody>
+      <tr>
+        <td>Name</td>
+        <td>{{user.first_name}} {{user.last_name}}</td>
+        <td>Role</td>
+        <td>{{role}}</td>
+      </tr>
+      <tr>
+        <td>Phone</td>
+        <td>{{user.phone}}</td>
+        <td>E-mail</td>
+        <td>{{email}}</td>
+      </tr>
+      {% if role == 'Doctor' %}
+      <tr>
+        <td>Specialization</td>
+        <td>{{user.Specalization.specalization}}</td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+{% endblock %}

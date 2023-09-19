@@ -1,0 +1,168 @@
+{% extends "administrator/admin_base.html" %}
+
+{%block content%}
+<div>
+<h1>Search Staff</h1>
+<form action="{% url 'searchstaff' %}">
+<div class="input-group mb-3">
+    <input type="text" name='search' class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit" >Search</button>
+    </div>
+  </div>
+</form>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Photo</th>
+        <th scope="col">Name</th>
+        <th scope="col">Role</th>
+        <th scope="col">Phone</th>
+        <th scope="col">E-mail</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      {% if user.groups.all.0.name == 'Reception' and user.receptionprofile.active == True %}
+          <tr>
+              <th scope="row">{{user.id}}</th>
+              <th scope="row">
+                <div style="width: 60px; height: 60px;">
+                  {% if user.receptionprofile.profile_picture.url != None%}
+                  <img style="width: 100%; height: 100%; object-fit: cover; object-position: center;"src="{{user.receptionprofile.profile_picture.url}}">
+                  {% endif %}
+                </div>
+              </th>
+              <td>{{user.receptionprofile.first_name}} {{user.receptionprofile.last_name}}</td>
+              <td>Reception</td>
+              <td>{{user.receptionprofile.phone}}</td>
+              <td>{{user.email}}</td>
+              <td><a href="{% url 'deletereception' user.receptionprofile.id %}"><button class="btn btn-danger">Delete</button></td>
+          </tr>
+      {% endif %}
+      {% if user.groups.all.0.name == 'Cashier' and user.cashierprofile.active == True %}
+          <tr>
+              <th scope="row">{{user.id}}</th>
+              <th scope="row">
+                <div style="width: 60px; height: 60px;">
+                  {% if user.cashierprofile.profile_picture.url != None%}
+                  <img style="width: 100%; height: 100%; object-fit: cover; object-position: center;"src="{{user.cashierprofile.profile_picture.url}}">
+                  {% endif %}
+                </div>
+              </th>
+              <td>{{user.cashierprofile.first_name}} {{user.cashierprofile.last_name}}</td>
+              <td>Cashier</td>
+              <td>{{user.cashierprofile.phone}}</td>
+              <td>{{user.email}}</td>
+              <td><a href="{% url 'deletecashier' user.cashierprofile.id %}"><button class="btn btn-danger">Delete</button></td>
+          </tr>
+      {% endif %}
+      {% if user.groups.all.0.name == 'Nurse' and user.nurseprofile.active == True %}
+          <tr>
+              <th scope="row">{{user.id}}</th>
+              <th scope="row">
+                <div style="width: 60px; height: 60px;">
+                  {% if user.nurseprofile.profile_picture.url != None%}
+                  <img style="width: 100%; height: 100%; object-fit: cover; object-position: center;"src="{{user.nurseprofile.profile_picture.url}}">
+                  {%endif%}
+                  </div>
+              </th>
+              <td>{{user.nurseprofile.first_name}} {{user.nurseprofile.last_name}}</td>
+              <td>Nurse</td>
+              <td>{{user.nurseprofile.phone}}</td>
+              <td>{{user.email}}</td>
+              <td><a href="{% url 'deletenurse' user.nurseprofile.id %}"><button class="btn btn-danger">Delete</button></td>
+          </tr>
+      {% endif %}
+      {% if user.groups.all.0.name == 'Doctor' and user.doctorprofile.active == True %}
+          <tr>
+              <th scope="row">{{user.id}}</th>
+              <th scope="row">
+                <div style="width: 60px; height: 60px;">
+                  {% if user.doctorprofile.profile_picture.url != None%}
+                  <img style="width: 100%; height: 100%; object-fit: cover; object-position: center;"src="{{user.doctorprofile.profile_picture.url}}">
+                  {%endif%}
+                  </div>
+              </th>
+              <td>{{user.doctorprofile.first_name}} {{user.doctorprofile.last_name}}</td>
+              <td>Doctor</td>
+              <td>{{user.doctorprofile.phone}}</td>
+              <td>{{user.email}}</td>
+              <td><a href="{% url 'deletedoctor' user.doctorprofile.id %}"><button class="btn btn-danger">Delete</button></td>
+          </tr>
+      {% endif %}
+      {% if user.groups.all.0.name == 'Pharmacist' and user.pharmacistprofile.active == True %}
+          <tr>
+              <th scope="row">{{user.id}}</th>
+              <th scope="row">
+                <div style="width: 60px; height: 60px;">
+                  {% if user.pharmacistprofile.profile_picture.url != None%}
+                  <img style="width: 100%; height: 100%; object-fit: cover; object-position: center;"src="{{user.pharmacistprofile.profile_picture.url}}">
+                  {%endif%}
+                  </div>
+              </th>
+              <td>{{user.pharmacistprofile.first_name}} {{user.pharmacistprofile.last_name}}</td>
+              <td>Pharmacist</td>
+              <td>{{user.pharmacistprofile.phone}}</td>
+              <td>{{user.email}}</td>
+              <td><a href="{% url 'deletepharma' user.pharmacistprofile.id %}"><button class="btn btn-danger">Delete</button></td>
+          </tr>
+      {% endif %}
+      {% if user.groups.all.0.name == 'Radiologist' and user.radiologistprofile.active == True %}
+          <tr>
+              <th scope="row">{{user.id}}</th>
+              <th scope="row">
+                <div style="width: 60px; height: 60px;">
+                  {% if user.radiologistprofile.profile_picture.url != None%}
+                  <img style="width: 100%; height: 100%; object-fit: cover; object-position: center;"src="{{user.radiologistprofile.profile_picture.url}}">
+                  {%endif%}
+                  </div>
+              </th>
+              <td>{{user.radiologistprofile.first_name}} {{user.radiologistprofile.last_name}}</td>
+              <td>Radiologist</td>
+              <td>{{user.radiologistprofile.phone}}</td>
+              <td>{{user.email}}</td>
+              <td><a href="{% url 'deleteradiologist' user.radiologistprofile.id %}"><button class="btn btn-danger">Delete</button></td>
+          </tr>
+      {% endif %}
+      {% if user.groups.all.0.name == 'Lab' and user.labtechnicianprofile.active == True %}
+          <tr>
+              <th scope="row">{{user.id}}</th>
+              <th scope="row">
+                <div style="width: 60px; height: 60px;">
+                  {% if user.labtechnicianprofile.profile_picture.url != None%}
+                  <img style="width: 100%; height: 100%; object-fit: cover; object-position: center;"src="{{user.labtechnicianprofile.profile_picture.url}}">
+                  {%endif%}
+                  </div>
+              </th>
+              <td>{{user.labtechnicianprofile.first_name}} {{user.labtechnicianprofile.last_name}}</td>
+              <td>Lab Technician</td>
+              <td>{{user.labtechnicianprofile.phone}}</td>
+              <td>{{user.email}}</td>
+              <td><a href="{% url 'deletelab' user.labtechnicianprofile.id %}"><button class="btn btn-danger">Delete</button></td>
+          </tr>
+      {% endif %}
+      {% if user.groups.all.0.name == 'Materialmanager' and user.materialmanagerprofile.active == True %}
+          <tr>
+              <th scope="row">{{user.id}}</th>
+              <th scope="row">
+                <div style="width: 60px; height: 60px;">
+                  {% if user.materialmanagerprofile.profile_picture.url != None%}
+                  <img style="width: 100%; height: 100%; object-fit: cover; object-position: center;"src="{{user.materialmanagerprofile.profile_picture.url}}">
+                  {%endif%}
+                  </div>
+              </th>
+              <td>{{user.materialmanagerprofile.first_name}} {{user.materialmanagerprofile.last_name}}</td>
+              <td>Materialmanager</td>
+              <td>{{user.materialmanagerprofile.phone}}</td>
+              <td>{{user.email}}</td>
+              <td><a href="{% url 'deletematerial' user.materialmanagerprofile.id %}"><button class="btn btn-danger">Delete</button></td>
+          </tr>
+      {% endif %}
+  {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+{% endblock%}

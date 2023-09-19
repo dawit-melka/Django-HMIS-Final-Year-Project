@@ -1,0 +1,16 @@
+{% extends "administrator/admin_base.html" %}
+{%block content%}
+<h1>Update Profile</h1>
+<body>
+    {% load crispy_forms_tags %}
+    <div class="container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{profile_form|crispy}}
+        <input type="submit" value="Update" class="btn btn-success">
+    </form>
+</div>
+    
+</body>
+</html>
+{% endblock %}

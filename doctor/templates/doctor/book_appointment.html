@@ -1,0 +1,12 @@
+{% extends "doctor/doc_base.html" %}
+{%block content%}
+  <h1>Book Appointment</h1>
+  {% load crispy_forms_tags %}
+  <div class="container">
+
+  <form method="POST">
+      {% csrf_token %}
+      {{form|crispy}}
+      <input type="submit" value="Book" class="btn btn-success">
+  </form>
+{% endblock %}
